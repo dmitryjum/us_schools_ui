@@ -11,7 +11,7 @@ class SchoolList extends Component {
   }
 
   async componentDidMount() {
-    const response = await USUApi.getSchools({ 'page': 1, 'per_page': 20 })
+    const response = await USUApi.getSchools({ 'page': 1, 'per_page': 10 })
     this.setState({ schools: response.data.records })
   }
 

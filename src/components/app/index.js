@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SchoolList from '../schoolList';
-import TopTwentyKeys from '../topTwentyKeys'
+import TopTwentyKeys from '../topTwentyKeys';
+import SearchSchool from '../SearchSchool';
 import './index.css';
 import { Container, Row, Col, Navbar, Nav} from 'react-bootstrap';
 
@@ -16,6 +17,7 @@ class App extends Component {
             <Nav.Link href="#LogIn">Log In</Nav.Link>
           </Nav>
         </Navbar>
+        <SearchSchool/>
         <Row>
           <Col>
             <TopTwentyKeys/>
@@ -33,9 +35,6 @@ export default App;
 
 //TODO:
 // 3: Create SchoolCard component for each school card
-// 4: Create TopKeys component with search links for each key
-// 5: Add Search bar section above TopKeys and SchoolList compnents
-// 6: Add NavBar with LogIn/SignUp
 // 6.1: Add React Router
 // 7: Make search work either according current API end points,
 // or add full text search functionality to api
