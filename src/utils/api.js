@@ -9,6 +9,12 @@ class USUApi {
       params: params
     })
   }
+
+  static async getTopTwentyKeys() {
+    return axios.get(`${constants.US_STATE_UNIVERSITIES_LOCAL_HOST}/api/v1/schools/top_twenty_keys`, {
+      headers: {'Accept': 'application/json'}
+    })
+  }
 }
 
 export default USUApi

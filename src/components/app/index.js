@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import SchoolList from '../schoolList';
+import TopTwentyKeys from '../topTwentyKeys'
 import './index.css';
 import { Container, Row, Col, Navbar, Nav} from 'react-bootstrap';
-// import USUApi from '../../utils/api';
 
 class App extends Component {
 
@@ -18,7 +18,7 @@ class App extends Component {
         </Navbar>
         <Row>
           <Col>
-
+            <TopTwentyKeys/>
           </Col>
           <Col>
             <SchoolList/>

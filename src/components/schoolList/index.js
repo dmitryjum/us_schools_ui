@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
 import { Card } from 'react-bootstrap';
 import USUApi from '../../utils/api';
 
@@ -18,6 +17,8 @@ class SchoolList extends Component {
 
   render() {
     return (
+      <>
+      <h3>School Results</h3>
       <ul>
         {
           this.state.schools.map((school) => (
@@ -29,12 +30,9 @@ class SchoolList extends Component {
           ))
         }
       </ul>
+      </>
     );
   }
 }
-
-SchoolList.propTypes = {
-    schools: PropTypes.array,
-};
 
 export default SchoolList;
