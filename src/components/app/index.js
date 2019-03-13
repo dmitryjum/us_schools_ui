@@ -1,35 +1,28 @@
 import React, { Component } from 'react';
-import SchoolList from '../schoolList'
-import * as constants from '../../constants/env/us_states'
+import SchoolList from '../schoolList';
 import './index.css';
-import axios from 'axios'
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Navbar, Nav} from 'react-bootstrap';
+// import USUApi from '../../utils/api';
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      schools: []
-    }
-  }
-
-  async componentDidMount() {
-    const response = await axios.get(`${constants.US_STATE_UNIVERSITIES_LOCAL_HOST}/api/v1/schools`, {
-      headers: {'Accept': 'application/json'},
-      params: {'page': 1, 'per_page': 20}
-    })
-    this.setState({schools: response.data.records})
-  }
 
   render() {
     return (
       <Container>
+        <Navbar bg="primary" variant="dark">
+          <Navbar.Brand href="#home">Home</Navbar.Brand>
+          <Nav>
+            <Nav.Link href="#SignUp">Sign Up</Nav.Link>
+            <Nav.Link href="#LogIn">Log In</Nav.Link>
+          </Nav>
+        </Navbar>
         <Row>
-          <Col></Col>
           <Col>
-            <SchoolList schools={this.state.schools} />
+
           </Col>
-          <Col></Col>
+          <Col>
+            <SchoolList/>
+          </Col>
         </Row>
       </Container>
     );
@@ -39,8 +32,6 @@ class App extends Component {
 export default App;
 
 //TODO:
-// 1: Create API class for for all the requests that will be used within the app
-// 2: Bring the schools request to SchoolList component
 // 3: Create SchoolCard component for each school card
 // 4: Create TopKeys component with search links for each key
 // 5: Add Search bar section above TopKeys and SchoolList compnents
