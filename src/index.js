@@ -7,24 +7,31 @@ import LogIn from './components/logIn';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Container, Navbar, Nav } from 'react-bootstrap';
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import rootReducer from "./reducers";
+
+const store = createStore(rootReducer);
 
 function Layout() {
   return (
-    <Router>
-      <Container>
-        <Navbar bg="primary" variant="dark">
-          <Navbar.Brand href="/">Home</Navbar.Brand>
-          <Nav>
-            <Nav.Link href="/signup">Sign Up</Nav.Link>
-            <Nav.Link href="/login">Log In</Nav.Link>
-          </Nav>
-        </Navbar>
+    <Provider store={store}>
+      <Router>
+        <Container>
+          <Navbar bg="primary" variant="dark">
+            <Navbar.Brand href="/">Home</Navbar.Brand>
+            <Nav>
+              <Nav.Link href="/signup">Sign Up</Nav.Link>
+              <Nav.Link href="/login">Log In</Nav.Link>
+            </Nav>
+          </Navbar>
 
-        <Route exact path="/" component={Home} />
-        <Route path="/signup" component={SignUp} />
-        <Route path="/login" component={LogIn} />
-      </Container>
-    </Router>
+          <Route exact path="/" component={Home} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/login" component={LogIn} />
+        </Container>
+      </Router>
+    </Provider>
   );
 }
 
