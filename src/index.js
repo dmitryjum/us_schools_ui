@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Home from './components/home';
+import SignUp from './components/signUp';
+import LogIn from './components/logIn';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Container, Navbar, Nav } from 'react-bootstrap';
@@ -13,11 +15,14 @@ function Layout() {
         <Navbar bg="primary" variant="dark">
           <Navbar.Brand href="/">Home</Navbar.Brand>
           <Nav>
-            <Nav.Link href="#SignUp">Sign Up</Nav.Link>
-            <Nav.Link href="#LogIn">Log In</Nav.Link>
+            <Nav.Link href="/signup">Sign Up</Nav.Link>
+            <Nav.Link href="/login">Log In</Nav.Link>
           </Nav>
         </Navbar>
+
         <Route exact path="/" component={Home} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/login" component={LogIn} />
       </Container>
     </Router>
   );

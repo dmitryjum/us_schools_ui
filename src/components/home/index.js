@@ -25,7 +25,6 @@ export default Home;
 
 //TODO:
 // 3: Create SchoolCard component for each school card
-// 6.1: Add React Router
 // 7: Make search work either according current API end points,
 // or add full text search functionality to api
 // 8: Integrate Redux with SchoolList, TopKeys and SchoolSearch
