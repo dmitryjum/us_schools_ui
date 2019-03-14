@@ -8,10 +8,9 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import rootReducer from "./reducers";
+import configureStore from './store'
 
-const store = createStore(rootReducer);
+const store = configureStore()
 
 function Layout() {
   return (
