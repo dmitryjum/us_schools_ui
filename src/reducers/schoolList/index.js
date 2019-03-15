@@ -8,7 +8,7 @@ export default function schools(state = initialState, action) {
   switch (action.type) {
     case REQUEST_SCHOOLS:
     return {
-      ...state, data: action.payload.data.records
+      ...state, data: action.payload.data.records // deal with no pagination
     };
     default:
       return state;

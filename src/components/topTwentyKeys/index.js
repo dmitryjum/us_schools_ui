@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+// import PropTypes from 'prop-types';
 import USUApi from '../../utils/api';
+import { Button } from 'react-bootstrap';
 
 class TopTwentyKeys extends Component {
   constructor(props) {
@@ -9,6 +11,10 @@ class TopTwentyKeys extends Component {
     }
   }
 
+  handleClick(key) {
+    this.props.findByKey({ details: key, page: 1, per_page: 10 });
+  }
+  
   async componentDidMount() {
     const response = await USUApi.getTopTwentyKeys();
     this.setState({keys: response.data})
@@ -20,7 +26,12 @@ class TopTwentyKeys extends Component {
         <h3>Top 20 detail keys to search schools by</h3>
         <ul>
           {
-            Object.entries(this.state.keys).map(([k,v]) => <li key={k}>{k}, apears times: {v}</li>)
+            Object.entries(this.state.keys)
+              .map(([k, v]) => (
+                <li key={k}>
+                  <Button variant="link" onClick={(e) => this.handleClick(k, e)}>{k}</Button>, apears times: {v}
+                </li>)
+              )
           }
         </ul>
       </>

@@ -11,7 +11,7 @@ import * as SchoolListActions from "../../actions/schoolList";
 class Home extends Component {
 
   componentDidMount() {
-    this.props.actions.requestSchools()
+    this.props.actions.requestSchools({'page': 1, 'per_page': 10})
   }
 
   render() {
@@ -20,7 +20,7 @@ class Home extends Component {
         <SearchSchool/>
         <Row>
           <Col>
-            <TopTwentyKeys/>
+            <TopTwentyKeys findByKey={this.props.actions.requestSchools} />
           </Col>
           <Col>
             <SchoolList schools={this.props.schools} />
@@ -49,7 +49,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(Home);
 // 3: Create SchoolCard component for each school card
 // 7: Make search work either according current API end points,
 // or add full text search functionality to api
-// 8: Integrate Redux with SchoolList, TopKeys and SchoolSearch
 // 9: Create SignUp page and integrate it with Redux
 // 10: Create Login page and integrate it with Redux
 // 11: Create Add New School Modal
