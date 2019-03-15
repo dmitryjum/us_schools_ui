@@ -1,27 +1,49 @@
-import React from 'react';
+import React, { Component } from 'react';
 import SchoolList from '../schoolList';
 import TopTwentyKeys from '../topTwentyKeys';
 import SearchSchool from '../SearchSchool';
 import './index.css';
 import { Row, Col} from 'react-bootstrap';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as SchoolListActions from "../../actions/schoolList";
 
-function Home() {
-  return (
-    <>
-      <SearchSchool/>
-      <Row>
-        <Col>
-          <TopTwentyKeys/>
-        </Col>
-        <Col>
-          <SchoolList/>
-        </Col>
-      </Row>
-    </>
-  );
+class Home extends Component {
+
+  componentDidMount() {
+    this.props.actions.requestSchools()
+  }
+
+  render() {
+    return (
+      <>
+        <SearchSchool/>
+        <Row>
+          <Col>
+            <TopTwentyKeys/>
+          </Col>
+          <Col>
+            <SchoolList schools={this.props.schools} />
+          </Col>
+        </Row>
+      </>
+    );
+  }
 }
 
-export default Home;
+function mapStateToProps(state) {
+  return {
+    schools: state.schools.data
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(SchoolListActions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 //TODO:
 // 3: Create SchoolCard component for each school card
