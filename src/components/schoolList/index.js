@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
 import { Card } from 'react-bootstrap';
-// import USUApi from '../../utils/api';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as SchoolListActions from '../../actions/schoolList'
 
 class SchoolList extends Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     schools: []
-  //   }
-  // }
 
-  // async componentDidMount() {
-  //   const response = await USUApi.getSchools({ 'page': 1, 'per_page': 10 })
-  //   this.setState({ schools: response.data.records })
-  // }
+  componentDidMount() {
+    this.props.actions.requestSchools()
+  }
 
   render() {
     return (
@@ -38,8 +32,14 @@ class SchoolList extends Component {
 
 function mapStateToProps(state) {
   return {
-    schools: state.schools
+    schools: state.schools.data
   }
 }
 
-export default connect(mapStateToProps)(SchoolList);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(SchoolListActions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SchoolList);

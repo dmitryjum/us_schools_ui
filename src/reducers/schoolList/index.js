@@ -1,14 +1,16 @@
+import { REQUEST_SCHOOLS } from "../../actions/schoolList";
+
 const initialState = {
-  schools: [
-    {
-      'title': 'Test School',
-      'details': {
-        'location': 'Test Town'
-      }
-    }
-  ]
+  data: []
 }
 
-export default function() {
-  return initialState.schools
+export default function schools(state = initialState, action) {
+  switch (action.type) {
+    case REQUEST_SCHOOLS:
+    return {
+      ...state, data: action.payload.data.records
+    };
+    default:
+      return state;
+  }
 }
