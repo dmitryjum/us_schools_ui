@@ -1,5 +1,12 @@
 const initialState = {
-  schools: []
+  schools: [
+    {
+      'title': 'Test School',
+      'details': {
+        'location': 'Test Town'
+      }
+    }
+  ]
 }
 
 export default function() {
