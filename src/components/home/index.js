@@ -53,3 +53,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(Home);
 // 12: Create Edit school functionality
 // 13: Add more schools to list with button in the bottom
 // 14: Add school card drop down with school details info
+// 15: Configure webpack
+// 16: Find ways to host it
+// 17: Write tests
