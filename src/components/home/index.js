@@ -47,10 +47,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 //TODO:
 // 3: Create SchoolCard component for each school card
-// 7: Make search work either according current API end points,
-// or add full text search functionality to api
 // 9: Create SignUp page and integrate it with Redux
 // 10: Create Login page and integrate it with Redux
 // 11: Create Add New School Modal
 // 12: Create Edit school functionality
 // 13: Add more schools to list with button in the bottom
+// 14: Add school card drop down with school details info
