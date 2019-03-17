@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
 import USUApi from '../../utils/api';
 import { Button } from 'react-bootstrap';
 

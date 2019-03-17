@@ -17,7 +17,7 @@ class Home extends Component {
   render() {
     return (
       <>
-        <SearchSchool/>
+        <SearchSchool search={this.props.actions.search} />
         <Row>
           <Col>
             <TopTwentyKeys findByKey={this.props.actions.requestSchools} />
