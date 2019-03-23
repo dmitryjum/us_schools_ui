@@ -1,18 +1,20 @@
 import { REQUEST_SCHOOLS, SEARCH } from "../../actions/schoolList";
 
 const initialState = {
-  data: []
+  data: {
+    records: []
+  }
 }
 
 export default function schools(state = initialState, action) {
   switch (action.type) {
     case REQUEST_SCHOOLS:
     return {
-      ...state, data: action.payload.data.records // deal with no pagination
+      ...state, data: action.payload.data // deal with no pagination
     };
     case SEARCH:
     return {
-      ...state, data: action.payload.data.records
+      ...state, data: action.payload.data
     }
     default:
       return state;

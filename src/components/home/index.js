@@ -33,7 +33,7 @@ class Home extends Component {
 
 function mapStateToProps(state) {
   return {
-    schools: state.schools.data
+    schools: state.schools.data.records
   };
 }
 
