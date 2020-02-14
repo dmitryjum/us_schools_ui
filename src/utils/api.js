@@ -24,8 +24,7 @@ class USUApi {
 
   static async signUp(params={}) {
     return axios.post(`${constants.US_STATE_UNIVERSITIES_LOCAL_HOST}/api/v1/users`, {
-      headers: { 'Accept': 'application/json' },
-      params: params
+      user: params
     })
   }
 }

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Form, Button, Jumbotron, Col } from 'react-bootstrap';
 import "./index.css";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as UserActions from "../../actions/user";
 
 class SignUp extends Component {
   constructor(props) {
@@ -15,6 +18,11 @@ class SignUp extends Component {
     console.log(this.emailRef.current.value)
     console.log(this.passwordRef.current.value)
     console.log(this.passConfirmRef.current.value)
+    this.props.actions.signUp({
+      'email': this.emailRef.current.value,
+      'password': this.passwordRef.current.value,
+      'password_confirmation': this.passConfirmRef.current.value
+    });
   }
 
   render() {
@@ -62,4 +70,16 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+function mapStateToProps(state) {
+  return {
+    signUpMessage: state.user.data.signUpMessage
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(UserActions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
