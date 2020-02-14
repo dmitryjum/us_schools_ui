@@ -11,18 +11,26 @@ class SignUp extends Component {
     this.emailRef = React.createRef();
     this.passwordRef = React.createRef();
     this.passConfirmRef = React.createRef();
+    this.signUpSuccess = this.signUpSuccess.bind(this)
   }
 
   handleSubmit(e){
     e.preventDefault()
-    console.log(this.emailRef.current.value)
-    console.log(this.passwordRef.current.value)
-    console.log(this.passConfirmRef.current.value)
     this.props.actions.signUp({
       'email': this.emailRef.current.value,
       'password': this.passwordRef.current.value,
       'password_confirmation': this.passConfirmRef.current.value
     });
+  }
+
+  signUpSuccess() {
+    if (this.props.signUpMessage !== '') {
+      return (
+        <div className="alert alert-success" role="alert">
+          User has been successfuly created
+        </div>
+      )
+    }
   }
 
   render() {
@@ -64,6 +72,7 @@ class SignUp extends Component {
               Submit
             </Button>
           </Form>
+          {this.signUpSuccess()}
         </Jumbotron>
       </Col>
     );
