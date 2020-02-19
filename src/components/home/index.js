@@ -49,6 +49,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(Home);
 // 3: Create SchoolCard component for each school card
 // 9: Create SignUp page and integrate it with Redux
 // 10: Create Login page and integrate it with Redux
+// (https://tighten.co/blog/react-101-part-4-firebase,
+// https://www.thegreatcodeadventure.com/jwt-storage-in-rails-the-right-way/)
 // 11: Create Add New School Modal
 // 12: Create Edit school functionality
 // 13: Add more schools to list with button in the bottom
