@@ -22,7 +22,7 @@ class USUApi {
     })
   }
 
-  static async signUp(params={}) {
+  static signUp(params={}) {
     return axios.post(`${constants.US_STATE_UNIVERSITIES_LOCAL_HOST}/api/v1/users`, {
       user: params
     })

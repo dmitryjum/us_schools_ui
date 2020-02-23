@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button, Jumbotron, Col } from 'react-bootstrap';
+import { Form, Button, Jumbotron, Col, Alert } from 'react-bootstrap';
 import "./index.css";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -11,7 +11,7 @@ class SignUp extends Component {
     this.emailRef = React.createRef();
     this.passwordRef = React.createRef();
     this.passConfirmRef = React.createRef();
-    this.signUpSuccess = this.signUpSuccess.bind(this)
+    this.signUpResult = this.signUpResult.bind(this)
   }
 
   handleSubmit(e){
@@ -20,17 +20,28 @@ class SignUp extends Component {
       'email': this.emailRef.current.value,
       'password': this.passwordRef.current.value,
       'password_confirmation': this.passConfirmRef.current.value
-    });
+    })
   }
 
-  signUpSuccess() {
-    if (this.props.signUpMessage !== '') {
-      return (
-        <div className="alert alert-success" role="alert">
-          User has been successfuly created
-        </div>
-      )
-    }
+  signUpResult() {
+      if (Object.keys(this.props.signUpMessage).length > 0) {
+        [
+          this.emailRef.current.value,
+          this.passwordRef.current.value,
+          this.passConfirmRef.current.value
+        ] = ['','',''];
+        return (
+          <Alert variant={this.props.signUpMessage.type}>
+            <ul>
+              {
+                this.props.signUpMessage.messages.map((message, id) => {
+                  return <li key={id}>{message}</li>
+                })
+              }
+            </ul>
+          </Alert>
+        );       
+      }
   }
 
   render() {
@@ -72,7 +83,7 @@ class SignUp extends Component {
               Submit
             </Button>
           </Form>
-          {this.signUpSuccess()}
+          {this.signUpResult()}
         </Jumbotron>
       </Col>
     );
