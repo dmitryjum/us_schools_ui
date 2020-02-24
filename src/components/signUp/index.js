@@ -24,20 +24,17 @@ class SignUp extends Component {
   }
 
   signUpResult() {
-      if (Object.keys(this.props.signUpMessage).length > 0) {
+    const msg = this.props.signUpMessage;
+      if (Object.keys(msg).length > 0) {
         [
           this.emailRef.current.value,
           this.passwordRef.current.value,
           this.passConfirmRef.current.value
         ] = ['','',''];
         return (
-          <Alert variant={this.props.signUpMessage.type}>
+          <Alert variant={msg.type}>
             <ul>
-              {
-                this.props.signUpMessage.messages.map((message, id) => {
-                  return <li key={id}>{message}</li>
-                })
-              }
+              { msg.messages.map((message, id) => <li key={id}>{message}</li>) }
             </ul>
           </Alert>
         );       
