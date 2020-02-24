@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button, Jumbotron, Col, Alert } from 'react-bootstrap';
+import { Form, Button, Jumbotron, Col, ListGroup } from 'react-bootstrap';
 import "./index.css";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -32,11 +32,13 @@ class SignUp extends Component {
           this.passConfirmRef.current.value
         ] = ['','',''];
         return (
-          <Alert variant={msg.type}>
-            <ul>
-              { msg.messages.map((message, id) => <li key={id}>{message}</li>) }
-            </ul>
-          </Alert>
+          <ListGroup variant="flush">
+            { 
+              msg.messages.map((message, id) => {
+                return <ListGroup.Item variant={msg.type} key={id}>{message}</ListGroup.Item>
+              })
+            }
+          </ListGroup>
         );       
       }
   }
