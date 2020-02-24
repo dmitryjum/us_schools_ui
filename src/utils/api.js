@@ -27,6 +27,10 @@ class USUApi {
       user: params
     })
   }
+
+  static logIn(params={}) {
+    return axios.post(`${constants.US_STATE_UNIVERSITIES_LOCAL_HOST}/api/v1/users/login`, params)
+  }
 }
 
 export default USUApi

@@ -62,7 +62,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 //TODO:
 // 3: Create SchoolCard component for each school card
-// 9: Create SignUp page and integrate it with Redux
 // 10: Create Login page and integrate it with Redux
 // (https://tighten.co/blog/react-101-part-4-firebase,
 // https://www.thegreatcodeadventure.com/jwt-storage-in-rails-the-right-way/)
