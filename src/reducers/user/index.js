@@ -2,7 +2,8 @@ import {
   SIGN_UP_SUCCESS,
   SIGN_UP_FAILURE,
   LOG_IN_SUCCESS,
-  LOG_IN_FAILURE
+  LOG_IN_FAILURE,
+  LOG_OUT
 } from "../../actions/user";
 
 const initialState = {
@@ -29,6 +30,10 @@ export default function user(state = initialState, action) {
         ...state, data: action.payload
       };
     case LOG_IN_FAILURE:
+      return {
+        ...state, data: action.payload
+      };
+    case LOG_OUT:
       return {
         ...state, data: action.payload
       }

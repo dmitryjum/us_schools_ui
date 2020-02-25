@@ -3,6 +3,7 @@ export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
 export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
 export const LOG_IN_FAILURE = 'LOG_IN_FAILURE';
+export const LOG_OUT = 'LOG_OUT';
 
 export function signUp(params = {}) {
   return dispatch => {
@@ -49,6 +50,19 @@ export function logIn(params = {}) {
   }
 }
 
+export function logOut() {
+  localStorage.removeItem("auth_token")
+  return {
+    type: LOG_OUT,
+    payload: {
+      signUpMessage: {},
+      logInMessage: {},
+      currentUser: {},
+      isAuthenticated: false
+    }
+  };
+}
+
 export function getCurrentUser() {
   const storedJWT = localStorage.getItem('auth_token')
   return dispatch => {
@@ -61,7 +75,12 @@ export function getCurrentUser() {
                 email: resp.data.email,
                 auth_token: storedJWT
               },
-              isAuthenticated: true
+              isAuthenticated: true,
+              signUpMessage: {},
+              logInMessage: {
+                type: "success",
+                messages: ["Your token is valid"]
+              }
             })
           );
         })

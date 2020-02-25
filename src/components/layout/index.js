@@ -10,22 +10,49 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 class Layout extends Component {
+  constructor(props) {
+    super(props)
+    this.navBar = this.navBar.bind(this)
+    this.logOut = this.logOut.bind(this)
+  }
+
   componentDidMount() {
     this.props.actions.getCurrentUser()
+  }
+
+  logOut(e) {
+    e.preventDefault()
+    this.props.actions.logOut()
+  }
+
+  navBar() {
+    if (this.props.isAuthenticated) {
+      return(
+        <Navbar bg="primary" variant="dark">
+          <Navbar.Brand href="/">Welcome Home {this.props.currentUser.email}</Navbar.Brand>
+          <Nav>
+            <Nav.Link href="#" onClick={(e) => this.logOut(e)}>Log Out</Nav.Link>
+          </Nav>
+        </Navbar>
+      )
+    } else {
+      return(
+        <Navbar bg="primary" variant="dark">
+          <Navbar.Brand href="/">Home</Navbar.Brand>
+          <Nav>
+            <Nav.Link href="/signup">Sign Up</Nav.Link>
+            <Nav.Link href="/login">Log In</Nav.Link>
+          </Nav>
+        </Navbar>
+      )
+    }
   }
 
   render() {
     return (
       <Router>
         <Container>
-          <Navbar bg="primary" variant="dark">
-            <Navbar.Brand href="/">Home</Navbar.Brand>
-            <Nav>
-              <Nav.Link href="/signup">Sign Up</Nav.Link>
-              <Nav.Link href="/login">Log In</Nav.Link>
-            </Nav>
-          </Navbar>
-
+          {this.navBar()}
           <Route exact path="/" component={Home} />
           <Route path="/signup" component={SignUp} />
           <Route path="/login" component={LogIn} />
@@ -37,6 +64,7 @@ class Layout extends Component {
 
 function mapStateToProps(state) {
   return {
+    isAuthenticated: state.user.data.isAuthenticated,
     currentUser: state.user.data.currentUser
   };
 }

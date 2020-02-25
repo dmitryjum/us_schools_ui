@@ -12,7 +12,7 @@ class Home extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      signUpAlertShow: true
+      signUpAlertShow: this.props.isAuthenticated
     }
   }
 
@@ -48,7 +48,8 @@ class Home extends Component {
 
 function mapStateToProps(state) {
   return {
-    schools: state.schools.data.records
+    schools: state.schools.data.records,
+    isAuthenticated: state.user.data.isAuthenticated
   };
 }
 
