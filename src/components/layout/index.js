@@ -55,7 +55,7 @@ class Layout extends Component {
           {this.navBar()}
           <Route exact path="/" component={Home} />
           <Route path="/signup" component={SignUp} />
-          <Route path="/login" component={LogIn} />
+          <Route path="/login" component={this.props.isAuthenticated ? Home : LogIn} />
         </Container>
       </Router>
     );
