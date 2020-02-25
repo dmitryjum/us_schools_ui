@@ -62,7 +62,6 @@ function mapDispatchToProps(dispatch) {
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 //TODO:
-// 3: Create SchoolCard component with school details dropdown
 // 11: Create Add New School Modal
 // 12: Create Edit school functionality
 // 13: Add more schools to list with button in the bottom
