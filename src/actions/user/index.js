@@ -45,19 +45,28 @@ export function logIn(params = {}) {
           })
         );
       })
-      .catch(error => {
-        localStorage.removeItem('auth_token')
-        dispatch(
-          logInFailure({
-            currentUser: {},
-            isAuthenticated: false,
-            logInMessage: {
-              type: 'warning',
-              messages: [error.response.data.error]
-            }
-          })
-        )
-      })
+      .catch(error => logInFailureCallBack(error, dispatch))
+  }
+}
+
+export function getCurrentUser() {
+  const storedJWT = localStorage.getItem('auth_token')
+  return dispatch => {
+    if (storedJWT) {
+      USUApi.isAuthenticated(storedJWT)
+        .then(resp => {
+          dispatch(
+            logInSuccess({
+              currentUser: {
+                email: resp.data.email,
+                auth_token: storedJWT
+              },
+              isAuthenticated: true
+            })
+          );
+        })
+        .catch(error => logInFailureCallBack(error, dispatch));
+    }
   }
 }
 
@@ -80,3 +89,16 @@ const logInFailure = payload => ({
   type: LOG_IN_FAILURE,
   payload
 })
+
+function logInFailureCallBack(error, dispatch) {
+  dispatch(
+    logInFailure({
+      currentUser: {},
+      isAuthenticated: false,
+      logInMessage: {
+        type: "warning",
+        messages: [error.response.data.error]
+      }
+    })
+  )
+}

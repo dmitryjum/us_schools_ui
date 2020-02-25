@@ -31,6 +31,15 @@ class USUApi {
   static logIn(params={}) {
     return axios.post(`${constants.US_STATE_UNIVERSITIES_LOCAL_HOST}/api/v1/users/login`, params)
   }
+
+  static isAuthenticated(token) {
+    return axios.get(
+      `${constants.US_STATE_UNIVERSITIES_LOCAL_HOST}/api/v1/users/is_authenticated`,
+      {
+        headers: { Authorization: `Bearer ${token}` }
+      }
+    ); 
+  }
 }
 
 export default USUApi
