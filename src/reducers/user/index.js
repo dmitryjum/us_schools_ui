@@ -1,12 +1,21 @@
-import { SIGN_UP_SUCCESS, SIGN_UP_FAILURE } from "../../actions/user";
+import {
+  SIGN_UP_SUCCESS,
+  SIGN_UP_FAILURE,
+  LOG_IN_SUCCESS,
+  LOG_IN_FAILURE,
+  LOG_OUT
+} from "../../actions/user";
 
 const initialState = {
   data: {
-    signUpMessage: {}
+    signUpMessage: {},
+    logInMessage: {},
+    currentUser: {},
+    isAuthenticated: false
   }
 }
 
-export default function signUp(state = initialState, action) {
+export default function user(state = initialState, action) {
   switch (action.type) {
     case SIGN_UP_SUCCESS:
       return {
@@ -15,6 +24,18 @@ export default function signUp(state = initialState, action) {
     case SIGN_UP_FAILURE:
       return {
         ...state, data: {signUpMessage: action.payload }
+      };
+    case LOG_IN_SUCCESS:
+      return {
+        ...state, data: action.payload
+      };
+    case LOG_IN_FAILURE:
+      return {
+        ...state, data: action.payload
+      };
+    case LOG_OUT:
+      return {
+        ...state, data: action.payload
       }
     default:
       return state;

@@ -25,22 +25,22 @@ class SignUp extends Component {
 
   signUpResult() {
     const msg = this.props.signUpMessage;
-      if (Object.keys(msg).length > 0) {
-        [
-          this.emailRef.current.value,
-          this.passwordRef.current.value,
-          this.passConfirmRef.current.value
-        ] = ['','',''];
-        return (
-          <ListGroup variant="flush">
-            { 
-              msg.messages.map((message, id) => {
-                return <ListGroup.Item variant={msg.type} key={id}>{message}</ListGroup.Item>
-              })
-            }
-          </ListGroup>
-        );       
-      }
+    if (Object.keys(msg).length > 0) {
+      [
+        this.emailRef.current.value,
+        this.passwordRef.current.value,
+        this.passConfirmRef.current.value
+      ] = ['','',''];
+      return (
+        <ListGroup variant="flush">
+          { 
+            msg.messages.map((message, id) => {
+              return <ListGroup.Item variant={msg.type} key={id}>{message}</ListGroup.Item>
+            })
+          }
+        </ListGroup>
+      );       
+    }
   }
 
   render() {
