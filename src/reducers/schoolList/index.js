@@ -1,21 +1,26 @@
-import { REQUEST_SCHOOLS, SEARCH } from "../../actions/schoolList";
+import { REQUEST_SCHOOLS, SEARCH, ADD_SCHOOLS } from "../../actions/schoolList";
 
 const initialState = {
-  data: {
-    records: []
-  }
+  records: [],
+  schoolPage: 1
 }
 
 export default function schools(state = initialState, action) {
   switch (action.type) {
     case REQUEST_SCHOOLS:
     return {
-      ...state, data: action.payload.data // deal with no pagination
+      ...state, records: action.payload.data.records // deal with no pagination
     };
     case SEARCH:
     return {
-      ...state, data: action.payload.data
-    }
+      ...state, records: action.payload.data.records
+    };
+    case ADD_SCHOOLS:
+      return {
+        ...state,
+        schoolPage: action.payload.schoolPage,
+        records: state.records.concat(action.payload.data.records)
+      }
     default:
       return state;
   }
