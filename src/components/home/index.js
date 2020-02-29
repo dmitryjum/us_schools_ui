@@ -11,7 +11,7 @@ import * as SchoolListActions from "../../actions/schoolList";
 class Home extends Component {
 
   componentDidMount() {
-    this.props.actions.requestSchools({'page': this.props.page, 'per_page': 10})
+    this.props.actions.requestSchools()
   }
 
   closeSignUpAlert() {
@@ -35,7 +35,7 @@ class Home extends Component {
             <SchoolList schools={this.props.schools} />
             <Button variant="primary"
              size="lg"
-             onClick={() => this.props.actions.addMoreSchools({'page': this.props.page + 1, 'per_page': 10})}
+             onClick={() => this.props.actions.addMoreSchools()}
              block
             >
               More schools!

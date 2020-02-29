@@ -2,7 +2,8 @@ import { REQUEST_SCHOOLS, SEARCH, ADD_SCHOOLS } from "../../actions/schoolList";
 
 const initialState = {
   records: [],
-  schoolPage: 1
+  schoolPage: 1,
+  per_page: 10
 }
 
 export default function schools(state = initialState, action) {
