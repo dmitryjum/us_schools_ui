@@ -3,7 +3,7 @@ import './index.css';
 import Home from '../home';
 import SignUp from '../signUp';
 import LogIn from '../logIn';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import * as UserActions from "../../actions/user";
 import { bindActionCreators } from "redux";
@@ -55,11 +55,22 @@ class Layout extends Component {
           {this.navBar()}
           <Route exact path="/" component={Home} />
           <Route path="/signup" component={SignUp} />
-          <Route path="/login" component={this.props.isAuthenticated ? Home : LogIn} />
+          <PrivateRoute authenticated={this.props.isAuthenticated} path="/login" component={LogIn} />
         </Container>
       </Router>
     );
   }
+}
+
+const PrivateRoute = ({component: Component, authenticated, ...props}) => {
+  return (
+    <Route
+      {...props}
+      render={(props) => !authenticated
+        ? <Component {...props} />
+        : <Redirect to='/' />}
+    />
+  )
 }
 
 function mapStateToProps(state) {
