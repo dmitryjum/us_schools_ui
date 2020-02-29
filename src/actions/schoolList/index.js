@@ -20,6 +20,8 @@ export async function search(params = {'term': ''}) {
 }
 
 export async function addMoreSchools(params={}) {
+  // potentially refactor with returning getState and dispatch
+  // get the page from getState and increment it right here
   return dispatch => {
     USUApi.getSchools(params)
       .then(resp => {
