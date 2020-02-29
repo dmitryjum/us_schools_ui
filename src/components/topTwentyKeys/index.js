@@ -11,7 +11,7 @@ class TopTwentyKeys extends Component {
   }
 
   handleClick(key) {
-    this.props.findByKey({ details: key, page: 1, per_page: 10 });
+    this.props.findByKey({ details: key });
   }
   
   async componentDidMount() {
