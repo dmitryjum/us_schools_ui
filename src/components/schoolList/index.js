@@ -1,7 +1,17 @@
 import React from 'react';
-import { Card, Accordion, ListGroup } from 'react-bootstrap';
+import { useSelector } from 'react-redux'
+import "./index.css";
+import { Card, Accordion, ListGroup, Button } from 'react-bootstrap';
 
 const SchoolList = ({schools}) => {
+  const isAuthenticated = useSelector(state => state.user.data.isAuthenticated)
+  function schoolModalButton () {
+    if(isAuthenticated) {
+      return(
+        <Button className="school-modal" variant="info">Go somewhere</Button>
+      )
+    }
+  }
 
   return (
     <>
@@ -21,6 +31,7 @@ const SchoolList = ({schools}) => {
                     );
                   })}
                 </ListGroup>
+                {schoolModalButton()}
               </Card.Body>
             </Accordion.Collapse>
           </Card>
