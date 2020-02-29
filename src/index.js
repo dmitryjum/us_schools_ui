@@ -4,6 +4,7 @@ import Layout from "./components/layout"
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import configureStore from "./store";
+import SchoolModal from './components/schoolModal';
 
 const store = configureStore();
 
@@ -11,6 +12,7 @@ function Root() {
   return (
     <Provider store={store}>
       <Layout />
+      <SchoolModal />
     </Provider>
   );
 }
