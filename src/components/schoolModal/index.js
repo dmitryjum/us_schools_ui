@@ -7,6 +7,7 @@ const SchoolModal = () => {
   const modalShow = useSelector(state => state.schoolModal.show);
   const dispatch = useDispatch();
   const handleClose = () => dispatch(closeModal());
+  
   return (
     <Modal
       show={modalShow}
