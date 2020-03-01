@@ -1,10 +1,16 @@
 import React from 'react';
-import { Modal } from 'react-bootstrap'
+import { Modal, Button } from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import { closeModal } from "../../actions/schoolModal";
 
-const SchoolModal = ({show}) => {
+const SchoolModal = () => {
+  const modalShow = useSelector(state => state.schoolModal.show);
+  const dispatch = useDispatch();
+  const handleClose = () => dispatch(closeModal());
   return (
     <Modal
-      show={false}
+      show={modalShow}
+      onHide={handleClose}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -22,6 +28,11 @@ const SchoolModal = ({show}) => {
           consectetur ac, vestibulum at eros.
         </p>
       </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>
+          Close
+        </Button>
+      </Modal.Footer>
     </Modal>
   );
 }

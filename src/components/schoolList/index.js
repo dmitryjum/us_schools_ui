@@ -1,14 +1,18 @@
 import React from 'react';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
 import "./index.css";
 import { Card, Accordion, ListGroup, Button } from 'react-bootstrap';
+import { openModal } from "../../actions/schoolModal";
 
 const SchoolList = ({schools}) => {
   const isAuthenticated = useSelector(state => state.user.data.isAuthenticated)
+  const dispatch = useDispatch();
+  const handleShow = () => dispatch(openModal());
+
   function schoolModalButton () {
     if(isAuthenticated) {
       return(
-        <Button className="school-modal" variant="info">Go somewhere</Button>
+        <Button className="school-modal" variant="info" onClick={handleShow}>Go somewhere</Button>
       )
     }
   }
