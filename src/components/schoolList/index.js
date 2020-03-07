@@ -7,12 +7,15 @@ import { openModal } from "../../actions/schoolModal";
 const SchoolList = ({schools}) => {
   const isAuthenticated = useSelector(state => state.user.data.isAuthenticated)
   const dispatch = useDispatch();
-  const handleShow = () => dispatch(openModal());
 
-  function schoolModalButton () {
+  function schoolModalButton(school) {
     if(isAuthenticated) {
       return(
-        <Button className="school-modal" variant="info" onClick={handleShow}>Go somewhere</Button>
+        <Button className="school-modal"
+          variant="info"
+          onClick={() => {dispatch(openModal({'school': school}))}}>
+            Edit School
+        </Button>
       )
     }
   }
@@ -35,7 +38,7 @@ const SchoolList = ({schools}) => {
                     );
                   })}
                 </ListGroup>
-                {schoolModalButton()}
+                {schoolModalButton(school)}
               </Card.Body>
             </Accordion.Collapse>
           </Card>

@@ -4,7 +4,8 @@ import {
 } from "../../actions/schoolModal"
 
 const initialState = {
-  show: false
+  show: false,
+  school: {}
 }
 
 export default function schoolModal(state = initialState, action) {
@@ -15,7 +16,7 @@ export default function schoolModal(state = initialState, action) {
       };
     case MODAL_CLOSE:
       return {
-        ...state, ...action.payload
+        ...state, show: false, school: {}
       };
     default:
       return state;

@@ -5,6 +5,7 @@ import { closeModal } from "../../actions/schoolModal";
 
 const SchoolModal = () => {
   const modalShow = useSelector(state => state.schoolModal.show);
+  const school = useSelector(state => state.schoolModal.school);
   const dispatch = useDispatch();
   const handleClose = () => dispatch(closeModal());
   
@@ -18,7 +19,7 @@ const SchoolModal = () => {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
+          {school.title}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>

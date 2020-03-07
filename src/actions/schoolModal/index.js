@@ -9,10 +9,8 @@ export function openModal(params={}) {
   }
 }
 
-export function closeModal(params={}) {
-  const payload = {...params, show: false}
+export function closeModal() {
   return {
-    type: MODAL_CLOSE,
-    payload
+    type: MODAL_CLOSE
   }
 }
