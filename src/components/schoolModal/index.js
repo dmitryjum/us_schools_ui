@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Form, InputGroup } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { closeModal } from "../../actions/schoolModal";
 
@@ -8,6 +8,11 @@ const SchoolModal = () => {
   const school = useSelector(state => state.schoolModal.school);
   const dispatch = useDispatch();
   const handleClose = () => dispatch(closeModal());
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    console.log()
+  }
   
   return (
     <Modal
@@ -23,12 +28,23 @@ const SchoolModal = () => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Centered Modal</h4>
-        <p>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-          consectetur ac, vestibulum at eros.
-        </p>
+        <Form onSubmit={(e) => handleSubmit(e)}>
+          {
+            Object.keys(school).map((key,index) => {
+              return(
+                <InputGroup size="sm" key={index}>
+                  <InputGroup.Prepend>
+                    <InputGroup.Text id="inputGroup-sizing-sm">{key}</InputGroup.Text>
+                  </InputGroup.Prepend>
+                  <Form.Control value={school[key]} aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
+                </InputGroup>
+              )
+            })
+          }
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
