@@ -2,6 +2,11 @@ import {
   MODAL_OPEN,
   MODAL_CLOSE
 } from "../../actions/schoolModal"
+// school initial state should be
+// school: {
+  // title: '',
+  // details: {}
+// }
 
 const initialState = {
   show: false,
