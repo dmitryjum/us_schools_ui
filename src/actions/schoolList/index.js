@@ -7,7 +7,7 @@ export async function requestSchools(params = {}) {
   return (dispatch, getState) => {
     params = {
       ...params,
-      'page': getState().schools.schoolPage + 1,
+      'page': getState().schools.schoolPage,
       'per_page': getState().schools.per_page
     };
     USUApi.getSchools(params)
