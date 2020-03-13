@@ -10,17 +10,17 @@ const SchoolModal = () => {
   const dispatch = useDispatch();
   const handleClose = () => dispatch(closeModal());
   const updateKeyCb = handleKeyChange.bind(this)
+  const onFocusCb = handleOnFocus.bind(this)
+  const onValueChange = handleValueChange.bind(this)
+  const [oldKey, setOldKey] = useState("")
+  let timer = null
   
-  // 1. Use useState hook for details object
-  // 2. Show school title and date last updated as read only or non-input fields
   // 3. Allow edit school title, if school got initial title '' from state
-  // 4. Keep state in useRef hook, or in useState, if details update causes loss of value
   // 5. Create a button to add a line with 2 input fields for key/value pair for details column
   // 6. That button should just add '': '' pair to details state object and the component will rerender
   // 7. The component should defirintiate new school with no id in state and edited school with existing id in state
   useEffect(() => {
     setSchoolDetails(school.details)
-    console.log("schoolDetails", schoolDetails)
   }, [school.details, schoolDetails])
 
   function handleSubmit(e) {
@@ -28,10 +28,28 @@ const SchoolModal = () => {
     console.log(schoolDetails)
   }
 
-  function handleKeyChange(e, key) {
-    const currentValue = schoolDetails[key];
-    delete schoolDetails[key]
+  function onTimedChange(e, handler) {
+    e.persist()
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      handler(e);
+    }, 500)
+  }
+
+  function handleKeyChange(e) {
+    const currentValue = schoolDetails[oldKey];
+    delete schoolDetails[oldKey]
     setSchoolDetails(Object.assign(schoolDetails, { [e.target.value]: currentValue }))
+    setOldKey(e.target.value)
+  }
+
+  function handleValueChange(e) {
+    const nearestKey = e.target.closest('div.row').querySelector("input[name='Key']").value
+    setSchoolDetails(Object.assign(schoolDetails, { [nearestKey]: e.target.value }))
+  }
+
+  function handleOnFocus(e) {
+    setOldKey(e.target.value)
   }
 
   return (
@@ -61,7 +79,10 @@ const SchoolModal = () => {
                       defaultValue={key}
                       aria-describedby="inputGroup-sizing-sm"
                       onChange={(e) => {
-                        updateKeyCb(e, key)
+                        onTimedChange(e, updateKeyCb)
+                      }}
+                      onFocus={(e) => {
+                        onFocusCb(e)
                       }}
                     />
                   </InputGroup>
@@ -74,7 +95,7 @@ const SchoolModal = () => {
                       aria-label="Value"
                       defaultValue={schoolDetails[key]}
                       aria-describedby="inputGroup-sizing-sm"
-                      onChange={(e) => setSchoolDetails(Object.assign(schoolDetails, {[key]: e.target.value}))}
+                      onChange={(e) => onTimedChange(e, onValueChange)}
                     />
                   </InputGroup>
                 </Col>
