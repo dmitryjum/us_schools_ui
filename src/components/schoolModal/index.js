@@ -6,6 +6,7 @@ import { closeModal } from "../../actions/schoolModal";
 const SchoolModal = () => {
   const modalShow = useSelector(state => state.schoolModal.show);
   const school = useSelector(state => state.schoolModal.school);
+  const user = useSelector(state => state.user.data.currentUser);
   const [schoolDetails, setSchoolDetails] = useState({});
   const dispatch = useDispatch();
   const handleClose = () => dispatch(closeModal());
@@ -25,11 +26,13 @@ const SchoolModal = () => {
 
   function handleSubmit(e) {
     e.preventDefault()
+    console.log(user)
     console.log(schoolDetails)
+    console.log(school.id)
   }
 
   function onTimedChange(e, handler) {
-    e.persist()
+    e.persist() //allows to send event in async call back without loss
     clearTimeout(timer)
     timer = setTimeout(() => {
       handler(e);
