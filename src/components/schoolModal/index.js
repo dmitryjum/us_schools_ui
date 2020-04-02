@@ -23,8 +23,9 @@ const SchoolModal = () => {
 
   function handleSubmit(e) {
     e.preventDefault()
+    setSchoolDetails(Object.assign(schoolDetails, { "last edited by": user.email }))
     console.log(user)
-    console.log(schoolDetails)
+    console.log(school)
     console.log(school.id)
   }
 

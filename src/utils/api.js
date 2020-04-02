@@ -9,6 +9,14 @@ class USUApi {
     })
   }
 
+  static updateSchool(params={}) {
+    return axios.patch(`${constants.US_STATE_UNIVERSITIES_LOCAL_HOST}/api/v1/schools`, {
+      headers: {'Authorization': `Bearer ${params['auth_token']}`},
+      id: params['id'],
+      school: params['school']
+    })
+  }
+
   static getTopTwentyKeys() {
     return axios.get(`${constants.US_STATE_UNIVERSITIES_LOCAL_HOST}/api/v1/schools/top_twenty_keys`, {
       headers: {'Accept': 'application/json'}
