@@ -1,7 +1,24 @@
 import React from 'react';
-import { Card, Accordion, ListGroup } from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import "./index.css";
+import { Card, Accordion, ListGroup, Button } from 'react-bootstrap';
+import { openModal } from "../../actions/schoolModal";
 
 const SchoolList = ({schools}) => {
+  const isAuthenticated = useSelector(state => state.user.data.isAuthenticated)
+  const dispatch = useDispatch();
+
+  function schoolModalButton(school) {
+    if(isAuthenticated) {
+      return(
+        <Button className="school-modal"
+          variant="info"
+          onClick={() => {dispatch(openModal({school}))}}>
+            Edit School
+        </Button>
+      )
+    }
+  }
 
   return (
     <>
@@ -21,6 +38,7 @@ const SchoolList = ({schools}) => {
                     );
                   })}
                 </ListGroup>
+                {schoolModalButton(school)}
               </Card.Body>
             </Accordion.Collapse>
           </Card>
