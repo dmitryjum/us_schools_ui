@@ -10,9 +10,6 @@ const SchoolModal = () => {
   const [schoolDetails, setSchoolDetails] = useState({});
   const dispatch = useDispatch();
   const handleClose = () => dispatch(closeModal());
-  const updateKeyCb = handleKeyChange.bind(this)
-  const onFocusCb = handleOnFocus.bind(this)
-  const onValueChange = handleValueChange.bind(this)
   const [oldKey, setOldKey] = useState("")
   let timer = null
   
@@ -39,19 +36,19 @@ const SchoolModal = () => {
     }, 500)
   }
 
-  function handleKeyChange(e) {
+  const handleKeyChange = (e) => {
     const currentValue = schoolDetails[oldKey];
     delete schoolDetails[oldKey]
     setSchoolDetails(Object.assign(schoolDetails, { [e.target.value]: currentValue }))
     setOldKey(e.target.value)
   }
 
-  function handleValueChange(e) {
+  const handleValueChange = (e) => {
     const nearestKey = e.target.closest('div.row').querySelector("input[name='Key']").value
     setSchoolDetails(Object.assign(schoolDetails, { [nearestKey]: e.target.value }))
   }
 
-  function handleOnFocus(e) {
+  const handleOnFocus = (e) => {
     setOldKey(e.target.value)
   }
 
@@ -82,10 +79,10 @@ const SchoolModal = () => {
                       defaultValue={key}
                       aria-describedby="inputGroup-sizing-sm"
                       onChange={(e) => {
-                        onTimedChange(e, updateKeyCb)
+                        onTimedChange(e, handleKeyChange)
                       }}
                       onFocus={(e) => {
-                        onFocusCb(e)
+                        handleOnFocus(e)
                       }}
                     />
                   </InputGroup>
@@ -98,7 +95,7 @@ const SchoolModal = () => {
                       aria-label="Value"
                       defaultValue={schoolDetails[key]}
                       aria-describedby="inputGroup-sizing-sm"
-                      onChange={(e) => onTimedChange(e, onValueChange)}
+                      onChange={(e) => onTimedChange(e, handleValueChange)}
                     />
                   </InputGroup>
                 </Col>
