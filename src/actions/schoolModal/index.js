@@ -1,3 +1,5 @@
+import USUApi from '../../utils/api';
+import { requestSchools } from '../../actions/schoolList'
 export const MODAL_OPEN = 'MODAL_OPEN';
 export const MODAL_CLOSE = 'MODAL_CLOSE';
 
@@ -12,5 +14,16 @@ export function openModal(params={}) {
 export function closeModal() {
   return {
     type: MODAL_CLOSE
+  }
+}
+
+export function updateSchool(params={}) {
+  return (dispatch) => {
+    USUApi.updateSchool(params)
+     .then(resp => {
+        dispatch(openModal({resp}))
+        dispatch(requestSchools())
+     })
+      .catch(error => console.log("school update Errors", error))
   }
 }

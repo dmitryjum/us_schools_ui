@@ -65,8 +65,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 //TODO:
 // 10: Sync More schools button with Top Twenty School functionality
-// 11: Create Add New School Modal
-// 12: Create Edit school functionality
+// 10.a: Store filter params for AddMoreSchools request
+// 11: Create NewSchool functionality additional to EditSchool
 // 15: Configure webpack
 // 16: Find ways to host it
 // 17: Write tests

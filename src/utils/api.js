@@ -10,10 +10,11 @@ class USUApi {
   }
 
   static updateSchool(params={}) {
-    return axios.patch(`${constants.US_STATE_UNIVERSITIES_LOCAL_HOST}/api/v1/schools`, {
-      headers: {'Authorization': `Bearer ${params['auth_token']}`},
-      id: params['id'],
-      school: params['school']
+    return axios({
+      url: `${constants.US_STATE_UNIVERSITIES_LOCAL_HOST}/api/v1/schools/${params['school']['id']}`,
+      method: 'patch',
+      headers: {Authorization: `Bearer ${params['auth_token']}`},
+      data: {school: params['school']}
     })
   }
 

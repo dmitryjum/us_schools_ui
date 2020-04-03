@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, FormControl, InputGroup, Badge, Row, Col } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { closeModal } from "../../actions/schoolModal";
+import { closeModal, updateSchool } from "../../actions/schoolModal";
 
 const SchoolModal = () => {
   const modalShow = useSelector(state => state.schoolModal.show);
@@ -17,6 +17,7 @@ const SchoolModal = () => {
   // 5. Create a button to add a line with 2 input fields for key/value pair for details column
   // 6. That button should just add '': '' pair to details state object and the component will rerender
   // 7. The component should defirintiate new school with no id in state and edited school with existing id in state
+  // 8. Make sure school list updates with correct page and filters when school is updated or created
   useEffect(() => {
     setSchoolDetails(school.details)
   }, [school.details, schoolDetails])
@@ -24,9 +25,7 @@ const SchoolModal = () => {
   function handleSubmit(e) {
     e.preventDefault()
     setSchoolDetails(Object.assign(schoolDetails, { "last edited by": user.email }))
-    console.log(user)
-    console.log(school)
-    console.log(school.id)
+    dispatch(updateSchool({auth_token: user.auth_token, school}))
   }
 
   function onTimedChange(e, handler) {
