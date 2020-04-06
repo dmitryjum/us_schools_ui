@@ -20,6 +20,21 @@ class Home extends Component {
     })
   }
 
+  moreSchoolsButton() {
+    if (this.props.page >= this.props.totalPages) return null
+    return(
+      <>
+        <Button variant="primary"
+          size="lg"
+          onClick={() => this.props.actions.addMoreSchools()}
+          block
+        >
+          More schools!
+        </Button>
+      </>
+    )
+  }
+
   render() {
     return (
       <>
@@ -33,13 +48,7 @@ class Home extends Component {
           </Col>
           <Col>
             <SchoolList schools={this.props.schools} />
-            <Button variant="primary"
-             size="lg"
-             onClick={() => this.props.actions.addMoreSchools()}
-             block
-            >
-              More schools!
-            </Button>
+            {this.moreSchoolsButton()}
           </Col>
         </Row>
       </>
@@ -51,6 +60,7 @@ function mapStateToProps(state) {
   return {
     schools: state.schools.records,
     page: state.schools.schoolPage,
+    totalPages: state.schools.totalPages,
     isAuthenticated: state.user.data.isAuthenticated
   };
 }
@@ -65,8 +75,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 //TODO:
 // 11: Create NewSchool functionality additional to EditSchool
-// 12: Sync Seatch functionality with Add More Schools Button
-// 13: Show Add More Schools button only if there are more schools
 // 15: Configure webpack
 // 16: Find ways to host it
 // 17: Write tests

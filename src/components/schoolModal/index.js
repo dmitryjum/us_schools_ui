@@ -12,7 +12,7 @@ const SchoolModal = () => {
   const handleClose = () => dispatch(closeModal());
   const [oldKey, setOldKey] = useState("")
   let timer = null
-  
+  // 2. Try to preserve search or filter state after School update
   // 3. Allow edit school title, if school got initial title '' from state
   // 5. Create a button to add a line with 2 input fields for key/value pair for details column
   // 6. That button should just add '': '' pair to details state object and the component will rerender
