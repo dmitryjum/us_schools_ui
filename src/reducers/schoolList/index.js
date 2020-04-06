@@ -5,14 +5,17 @@ const initialState = {
   schoolPage: 1,
   per_page: 10,
   filter: {},
-  search: {}
+  search: {},
+  totalPages: null
 }
 
 export default function schools(state = initialState, action) {
   switch (action.type) {
     case REQUEST_SCHOOLS:
       return {
-        ...state, records: action.payload.data.records // deal with no pagination
+        ...state,
+        totalPages: action.payload.data.pages_per_limit,
+        records: action.payload.data.records // deal with no pagination
       };
     case SET_SEARCH:
       return {
@@ -21,7 +24,9 @@ export default function schools(state = initialState, action) {
       };
     case SEARCH_SUCCESS:
       return {
-        ...state, records: action.payload.data.records
+        ...state,
+        totalPages: action.payload.data.pages_per_limit,
+        records: action.payload.data.records
       };
     case SET_FILTER:
       return {
@@ -32,6 +37,7 @@ export default function schools(state = initialState, action) {
       return {
         ...state,
         schoolPage: action.payload.schoolPage,
+        totalPages: action.payload.data.pages_per_limit,
         records: state.records.concat(action.payload.data.records)
       }
     default:
