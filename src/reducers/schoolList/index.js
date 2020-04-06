@@ -1,10 +1,11 @@
-import { REQUEST_SCHOOLS, SEARCH, ADD_SCHOOLS, SET_FILTER } from "../../actions/schoolList";
+import { REQUEST_SCHOOLS, ADD_SCHOOLS, SET_FILTER, SET_SEARCH, SEARCH_SUCCESS } from "../../actions/schoolList";
 
 const initialState = {
   records: [],
   schoolPage: 1,
   per_page: 10,
-  filter: {}
+  filter: {},
+  search: {}
 }
 
 export default function schools(state = initialState, action) {
@@ -13,7 +14,12 @@ export default function schools(state = initialState, action) {
       return {
         ...state, records: action.payload.data.records // deal with no pagination
       };
-    case SEARCH:
+    case SET_SEARCH:
+      return {
+        ...initialState,
+        search: action.payload.search
+      };
+    case SEARCH_SUCCESS:
       return {
         ...state, records: action.payload.data.records
       };

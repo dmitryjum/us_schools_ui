@@ -8,7 +8,7 @@ class SearchSchool extends Component {
   }
 
   handleClick(){
-    this.props.search({term: this.searchRef.current.value, page: 1, per_page: 10})
+    this.props.search({term: this.searchRef.current.value})
   }
 
   render() {
