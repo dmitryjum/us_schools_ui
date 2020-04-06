@@ -2,11 +2,13 @@ import USUApi from '../../utils/api';
 export const REQUEST_SCHOOLS = 'REQUEST_SCHOOLS';
 export const SEARCH = 'SEARCH';
 export const ADD_SCHOOLS = 'ADD_SCHOOLS';
+export const SET_FILTER = 'SET_FILTER';
 
 export async function requestSchools(params = {}) {
   return (dispatch, getState) => {
     params = {
       ...params,
+      ...getState().schools.filter,
       'page': getState().schools.schoolPage,
       'per_page': getState().schools.per_page
     };
@@ -26,9 +28,17 @@ export async function search(params = {'term': ''}) {
   }
 }
 
+export async function findByKey(params = {}) {
+  return (dispatch) => {
+    dispatch(setFilterThunk({filter: params}));
+    dispatch(requestSchools())
+  }
+}
+
 export function addMoreSchools(params={}) {
   return (dispatch, getState) => {
     params = {
+      ...getState().schools.filter,
       'page': getState().schools.schoolPage + 1,
       'per_page': getState().schools.per_page
     };
@@ -49,6 +59,11 @@ const addSchools = payload => ({
 
 const requestSchoolsThunk = payload => ({
   type: REQUEST_SCHOOLS,
+  payload
+});
+
+const setFilterThunk = payload => ({
+  type: SET_FILTER,
   payload
 })
 
