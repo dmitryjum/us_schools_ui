@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, FormControl, InputGroup, Badge, Row, Col } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { closeModal } from "../../actions/schoolModal";
+import { closeModal, updateSchool } from "../../actions/schoolModal";
 
 const SchoolModal = () => {
   const modalShow = useSelector(state => state.schoolModal.show);
@@ -17,15 +17,15 @@ const SchoolModal = () => {
   // 5. Create a button to add a line with 2 input fields for key/value pair for details column
   // 6. That button should just add '': '' pair to details state object and the component will rerender
   // 7. The component should defirintiate new school with no id in state and edited school with existing id in state
+  // 8. Make sure school list updates with correct page and filters when school is updated or created
   useEffect(() => {
     setSchoolDetails(school.details)
   }, [school.details, schoolDetails])
 
   function handleSubmit(e) {
     e.preventDefault()
-    console.log(user)
-    console.log(schoolDetails)
-    console.log(school.id)
+    setSchoolDetails(Object.assign(schoolDetails, { "last edited by": user.email }))
+    dispatch(updateSchool({auth_token: user.auth_token, school}))
   }
 
   function onTimedChange(e, handler) {
@@ -68,6 +68,7 @@ const SchoolModal = () => {
       <Modal.Body>
         {
           Object.keys(schoolDetails).map((key, index) => {
+            if (key === "last edited by") return null;
             return (
               <Row key={index}>
                 <Col>
@@ -105,7 +106,8 @@ const SchoolModal = () => {
         }
       </Modal.Body>
       <Modal.Footer>
-        <Badge pill variant="secondary">{school.updated_at}</Badge>
+        <Badge pill variant="info"><i>Edited by:</i> {school.details["last edited by"]}</Badge>
+        <Badge pill variant="secondary"><i>On:</i> {new Date(Date.parse(school.updated_at)).toDateString()}</Badge>
         <Button variant="primary" type="submit" onClick={(e) => handleSubmit(e)}>
           Submit
         </Button>
