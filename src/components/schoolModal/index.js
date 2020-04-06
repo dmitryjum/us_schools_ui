@@ -68,47 +68,46 @@ const SchoolModal = () => {
       <Modal.Body>
         {
           Object.keys(schoolDetails).map((key, index) => {
-            if (key !== "last edited by") {
-              return (
-                <Row key={index}>
-                  <Col>
-                    <InputGroup size="sm">
-                      <FormControl
-                        name="Key"
-                        placeholder="Key"
-                        aria-label="Key"
-                        defaultValue={key}
-                        aria-describedby="inputGroup-sizing-sm"
-                        onChange={(e) => {
-                          onTimedChange(e, handleKeyChange)
-                        }}
-                        onFocus={(e) => {
-                          handleOnFocus(e)
-                        }}
-                      />
-                    </InputGroup>
-                  </Col>
-                  <Col>
-                    <InputGroup size="sm">
-                      <FormControl
-                        name="Value"
-                        placeholder="Value"
-                        aria-label="Value"
-                        defaultValue={schoolDetails[key]}
-                        aria-describedby="inputGroup-sizing-sm"
-                        onChange={(e) => onTimedChange(e, handleValueChange)}
-                      />
-                    </InputGroup>
-                  </Col>
-                </Row>
-              )
-            }
+            if (key === "last edited by") return null;
+            return (
+              <Row key={index}>
+                <Col>
+                  <InputGroup size="sm">
+                    <FormControl
+                      name="Key"
+                      placeholder="Key"
+                      aria-label="Key"
+                      defaultValue={key}
+                      aria-describedby="inputGroup-sizing-sm"
+                      onChange={(e) => {
+                        onTimedChange(e, handleKeyChange)
+                      }}
+                      onFocus={(e) => {
+                        handleOnFocus(e)
+                      }}
+                    />
+                  </InputGroup>
+                </Col>
+                <Col>
+                  <InputGroup size="sm">
+                    <FormControl
+                      name="Value"
+                      placeholder="Value"
+                      aria-label="Value"
+                      defaultValue={schoolDetails[key]}
+                      aria-describedby="inputGroup-sizing-sm"
+                      onChange={(e) => onTimedChange(e, handleValueChange)}
+                    />
+                  </InputGroup>
+                </Col>
+              </Row>
+            )
           })
         }
       </Modal.Body>
       <Modal.Footer>
-        <Badge pill variant="info">{school.details["last edited by"]}</Badge>
-        <Badge pill variant="secondary">{school.updated_at}</Badge>
+        <Badge pill variant="info"><i>Edited by:</i> {school.details["last edited by"]}</Badge>
+        <Badge pill variant="secondary"><i>On:</i> {new Date(Date.parse(school.updated_at)).toDateString()}</Badge>
         <Button variant="primary" type="submit" onClick={(e) => handleSubmit(e)}>
           Submit
         </Button>
