@@ -48,17 +48,18 @@ export async function findByKey(params = {}) {
 export function addMoreSchools(params={}) {
   return (dispatch, getState) => {
     params = {
+      ...getState().schools.search,
       ...getState().schools.filter,
       'page': getState().schools.schoolPage + 1,
       'per_page': getState().schools.per_page
     };
-    USUApi.getSchools(params)
-      .then(resp => {
-        dispatch(
-          addSchools({...resp, schoolPage: params.page })
-        )
-      })
-      .catch(error => schoolFetchError(error))
+    const fetchSchools = params['term'] === undefined ?
+     USUApi.getSchools(params) : USUApi.search(params)
+    fetchSchools.then(resp => {
+      dispatch(
+        addSchools({...resp, schoolPage: params.page })
+      )
+    }).catch(error => schoolFetchError(error))
   }
 }
 

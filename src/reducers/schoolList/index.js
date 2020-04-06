@@ -25,9 +25,8 @@ export default function schools(state = initialState, action) {
       };
     case SET_FILTER:
       return {
-        ...state,
+        ...initialState,
         filter: action.payload.filter,
-        schoolPage: 1
       }
     case ADD_SCHOOLS:
       return {
