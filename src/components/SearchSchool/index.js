@@ -1,14 +1,25 @@
 import React, { useRef } from 'react';
 import { Jumbotron, InputGroup, FormControl, Button } from 'react-bootstrap'
 import { search } from "../../actions/schoolList";
-import { useDispatch } from 'react-redux';
+import { openModal } from "../../actions/schoolModal";
+import { useDispatch, useSelector } from 'react-redux';
 
 const SearchSchool = () => {
-  const searchRef = useRef(null)
+  const searchRef = useRef(null);
   const dispatch = useDispatch();
+  const isAuthenticated = useSelector(state => state.user.data.isAuthenticated);
 
   const handleClick = () => {
     dispatch(search({ term: searchRef.current.value}))
+  }
+
+  function newSchoolButton() {
+    if (!isAuthenticated) return null;
+    return (
+      <>
+        <Button variant="warning" onClick={() => dispatch(openModal())}>New School</Button>
+      </>
+    )
   }
 
   return (
@@ -23,7 +34,7 @@ const SearchSchool = () => {
         <InputGroup.Append>
           <Button variant="info" onClick={handleClick}>
             Search</Button>
-            <Button variant="warning">New School</Button>
+          {newSchoolButton()}
         </InputGroup.Append>
       </InputGroup>
     </Jumbotron>
