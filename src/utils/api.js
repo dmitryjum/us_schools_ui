@@ -18,6 +18,15 @@ class USUApi {
     })
   }
 
+  static createSchool(params={}) {
+    return axios({
+      url: `${constants.US_STATE_UNIVERSITIES_LOCAL_HOST}/api/v1/schools/}`,
+      method: 'post',
+      headers: { Authorization: `Bearer ${params['auth_token']}` },
+      data: { school: params['school'] }
+    })
+  }
+
   static getTopTwentyKeys() {
     return axios.get(`${constants.US_STATE_UNIVERSITIES_LOCAL_HOST}/api/v1/schools/top_twenty_keys`, {
       headers: {'Accept': 'application/json'}
