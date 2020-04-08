@@ -2,6 +2,7 @@ import React from 'react';
 import { Modal, Button, FormControl, InputGroup, Badge, Row, Col } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { closeModal, updateSchool, createSchool, openModal } from "../../actions/schoolModal";
+import './index.css'
 
 const SchoolModal = () => {
   const modalShow = useSelector(state => state.schoolModal.show);
@@ -11,8 +12,8 @@ const SchoolModal = () => {
   const handleClose = () => dispatch(closeModal());
   let timer = null
   let oldKey = ""
-  // 1. Add remove input row button
-  // 2. Try to preserve search or filter state after School update
+  // 1. Add validation to fields
+  // 2. Try to preserve search state after School update
   // 8. Make sure school list updates with correct page and filters when school is updated or created
 
   function handleSubmit(e) {
@@ -24,6 +25,13 @@ const SchoolModal = () => {
 
   const addARow = () => {
     school.details[""] = ""
+    dispatch(closeModal())
+    dispatch(openModal({ school }))
+  }
+  
+  const deleteRow = (e) => {
+    const nearestKey = e.target.closest('div.row').querySelector("input[name='Key']").value;
+    delete school.details[nearestKey];
     dispatch(closeModal())
     dispatch(openModal({ school }))
   }
@@ -58,6 +66,7 @@ const SchoolModal = () => {
     school.title = e.target.value
     dispatch(openModal({ school }))
   }
+
 
   const schoolTitle = () => {
     if (school.id) {
@@ -128,6 +137,7 @@ const SchoolModal = () => {
                       />
                     </InputGroup>
                   </Col>
+                  <span onClick={(e) => deleteRow(e)} className="remove-row">×</span>
                 </Row>
               )
             })
