@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Button, FormControl, InputGroup, Badge, Row, Col } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { closeModal, updateSchool, openModal } from "../../actions/schoolModal";
+import { closeModal, updateSchool, createSchool, openModal } from "../../actions/schoolModal";
 
 const SchoolModal = () => {
   const modalShow = useSelector(state => state.schoolModal.show);
@@ -11,16 +11,15 @@ const SchoolModal = () => {
   const handleClose = () => dispatch(closeModal());
   let timer = null
   let oldKey = ""
+  // 1. Add remove input row button
   // 2. Try to preserve search or filter state after School update
-  // 3. Allow edit school title, if school got initial title '' from state
-  // 5. Create a button to add a line with 2 input fields for key/value pair for details column
-  // 7. The component should defirintiate new school with no id in state and edited school with existing id in state
   // 8. Make sure school list updates with correct page and filters when school is updated or created
 
   function handleSubmit(e) {
     e.preventDefault()
     school.details["last edited by"] = user.email;
-    dispatch(updateSchool({auth_token: user.auth_token, school}))
+    const submitSchool = school.id ? updateSchool : createSchool
+    dispatch(submitSchool({auth_token: user.auth_token, school}))
   }
 
   const addARow = () => {
@@ -55,6 +54,32 @@ const SchoolModal = () => {
     oldKey = e.target.value
   }
 
+  const handleTitleChange = (e) => {
+    school.title = e.target.value
+    dispatch(openModal({ school }))
+  }
+
+  const schoolTitle = () => {
+    if (school.id) {
+      return (
+        school.title
+      )
+    } else {
+      return(
+        <InputGroup>
+          <FormControl
+            name="title"
+            placeholder="School Title"
+            aria-label="title"
+            onChange={(e) => {
+              onTimedChange(e, handleTitleChange)
+            }}
+          />
+        </InputGroup>
+      )
+    }
+  }
+
   return (
     <Modal
       show={modalShow}
@@ -65,7 +90,7 @@ const SchoolModal = () => {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          {school.title}
+          {schoolTitle()}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
