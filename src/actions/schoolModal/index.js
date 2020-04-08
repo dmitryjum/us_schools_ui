@@ -17,6 +17,17 @@ export function closeModal() {
   }
 }
 
+export function createSchool(params={}) {
+  return dispatch => {
+    USUApi.createSchool(params)
+      .then(resp => {
+        dispatch(openModal({resp}))
+        dispatch(requestSchools())
+      })
+      .catch(error => console.log("school create Errors", error))
+  }
+}
+
 export function updateSchool(params={}) {
   return (dispatch) => {
     USUApi.updateSchool(params)

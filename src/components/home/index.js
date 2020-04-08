@@ -38,7 +38,7 @@ class Home extends Component {
   render() {
     return (
       <>
-        <SearchSchool search={this.props.actions.search} />
+        <SearchSchool />
         <Alert show={!this.props.isAuthenticated} variant={'warning'}>
           Please <Alert.Link href="/signup">Sign Up</Alert.Link> or <Alert.Link href="/login">Log In</Alert.Link> if you want to edit or add schools.
         </Alert>
