@@ -16,7 +16,6 @@ const initialState = {
 export default function schoolModal(state = initialState, action) {
   switch (action.type) {
     case MODAL_OPEN:
-      debugger
       return { ...state, ...action.payload };
     case MODAL_CLOSE:
       return { ...state, ...initialState };

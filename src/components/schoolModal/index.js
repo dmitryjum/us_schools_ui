@@ -43,7 +43,7 @@ const SchoolModal = () => {
     const currentValue = school.details[oldKey];
     delete school.details[oldKey];
     school.details[e.target.value] = currentValue;
-    Object.assign(school, { details: school.details });
+    // Object.assign(school, { details: school.details });
     dispatch(openModal({ school }));
     // dispatch(setOldDetailsKey(e.target.value));
     oldKey = e.target.value
@@ -55,7 +55,7 @@ const SchoolModal = () => {
   const handleValueChange = (e) => {
     const nearestKey = e.target.closest('div.row').querySelector("input[name='Key']").value
     school.details[nearestKey] = e.target.value;
-    Object.assign(school, { details: school.details });
+    // Object.assign(school, { details: school.details });
     dispatch(openModal({ school }));
     // setSchoolDetails(Object.assign(schoolDetails, { [nearestKey]: e.target.value }))
   }

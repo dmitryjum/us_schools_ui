@@ -13,7 +13,7 @@ const SchoolList = ({schools}) => {
       return(
         <Button className="school-modal"
           variant="info"
-          onClick={() => {dispatch(openModal({school: Object.assign({}, school)}))}}>
+          onClick={() => {dispatch(openModal({school}))}}>
             Edit School
         </Button>
       )
