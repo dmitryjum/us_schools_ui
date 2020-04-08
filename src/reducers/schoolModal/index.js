@@ -1,7 +1,6 @@
 import {
   MODAL_OPEN,
-  MODAL_CLOSE,
-  SET_OLD_DETAILS_KEY
+  MODAL_CLOSE
 } from "../../actions/schoolModal"
 
 const initialState = {
@@ -9,8 +8,7 @@ const initialState = {
   school: {
     title: '',
     details: {}
-  },
-  oldDetailsKey: ''
+  }
 }
 
 export default function schoolModal(state = initialState, action) {
@@ -19,8 +17,6 @@ export default function schoolModal(state = initialState, action) {
       return { ...state, ...action.payload };
     case MODAL_CLOSE:
       return { ...state, ...initialState };
-    case SET_OLD_DETAILS_KEY:
-      return { ...state, ...action.payload}
     default:
       return state;
   }
