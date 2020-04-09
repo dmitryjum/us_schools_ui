@@ -14,12 +14,6 @@ class Home extends Component {
     this.props.actions.requestSchools()
   }
 
-  closeSignUpAlert() {
-    this.setState({
-      signUpAlertShow: false
-    })
-  }
-
   moreSchoolsButton() {
     if (this.props.page >= this.props.totalPages) return null
     return(
