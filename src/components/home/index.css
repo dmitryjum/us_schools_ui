@@ -1,5 +1,9 @@
-.navbar {
-  justify-content: space-between;
+.main {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  background-color: black;
+  color: white;
+  margin: 0 1em 0 1em;
 }
 /*.App {
   text-align: center;

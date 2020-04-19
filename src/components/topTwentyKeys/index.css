@@ -1,0 +1,11 @@
+.top-twenty-container {
+  background-color: gray;
+  opacity: 0.7;
+  color: black;
+  border-radius: 10px;
+}
+
+.top-twenty-wrapper {
+  padding-right: 15px;
+  padding-left: 15px;
+}

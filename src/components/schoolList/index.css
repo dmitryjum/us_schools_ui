@@ -1,4 +1,22 @@
-.school-modal {
+.school-modal-button {
   margin: 10px auto;
   display: block;
+}
+
+.card, .list-group-item {
+  background-color: inherit;
+}
+
+.card {
+  border: solid 0.5px white;
+}
+
+.card-header {
+  background: rgba(0, 255, 0, 0.2);
+}
+
+.card-body {
+  background-color: gray;
+  opacity: 0.7;
+  color: black;
 }

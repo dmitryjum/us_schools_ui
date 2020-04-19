@@ -11,7 +11,7 @@ const SchoolList = ({schools}) => {
   function schoolModalButton(school) {
     if(isAuthenticated) {
       return(
-        <Button className="school-modal"
+        <Button className="school-modal-button"
           variant="info"
           onClick={() => {dispatch(openModal({school}))}}>
             Edit School

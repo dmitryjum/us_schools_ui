@@ -36,10 +36,8 @@ class Home extends Component {
         <Alert show={!this.props.isAuthenticated} variant={'warning'}>
           Please <Alert.Link href="/signup">Sign Up</Alert.Link> or <Alert.Link href="/login">Log In</Alert.Link> if you want to edit or add schools.
         </Alert>
-        <Row>
-          <Col>
+        <Row className="main">
             <TopTwentyKeys findByKey={this.props.actions.findByKey} />
-          </Col>
           <Col>
             <SchoolList schools={this.props.schools} />
             {this.moreSchoolsButton()}

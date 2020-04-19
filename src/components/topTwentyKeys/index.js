@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import USUApi from '../../utils/api';
 import { Button } from 'react-bootstrap';
+import "./index.css";
 
 class TopTwentyKeys extends Component {
   constructor(props) {
@@ -21,9 +22,9 @@ class TopTwentyKeys extends Component {
 
   render() {
     return (
-      <>
+      <div className='top-twenty-wrapper'>
         <h3>Top 20 detail keys to search schools by</h3>
-        <ul>
+        <ul className='top-twenty-container'>
           {
             Object.entries(this.state.keys)
               .map(([k, v]) => (
@@ -33,7 +34,7 @@ class TopTwentyKeys extends Component {
               )
           }
         </ul>
-      </>
+      </div>
     );
   }
 }

@@ -4,7 +4,7 @@ import Home from '../home';
 import SignUp from '../signUp';
 import LogIn from '../logIn';
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import { Container, Navbar, Nav } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 import * as UserActions from "../../actions/user";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -51,12 +51,10 @@ class Layout extends Component {
   render() {
     return (
       <Router>
-        <Container>
-          {this.navBar()}
-          <Route exact path="/" component={Home} />
-          <Route path="/signup" component={SignUp} />
-          <PrivateRoute authenticated={this.props.isAuthenticated} path="/login" component={LogIn} />
-        </Container>
+        {this.navBar()}
+        <Route exact path="/" component={Home} />
+        <Route path="/signup" component={SignUp} />
+        <PrivateRoute authenticated={this.props.isAuthenticated} path="/login" component={LogIn} />
       </Router>
     );
   }
