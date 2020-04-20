@@ -13,8 +13,14 @@
 .top-twenty-container > .list-group-item {
   text-align: center;
   cursor: pointer;
+  margin-bottom: initial;
 }
 
 .top-twenty-container.list-group {
   margin-top: 0;
+}
+
+.selected {
+  color: #dc3545;
+  border-color: #dc3545;
 }
