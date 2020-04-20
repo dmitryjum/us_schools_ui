@@ -1,7 +1,12 @@
 .log-in-form {
-  margin-top: 15%
+  margin-top: 15%;
+  background-color: #343a40;
 }
 
 .list-group {
-  margin-top: 1em
+  margin-top: 1em;
+}
+
+.log-in-form .form-label {
+  color: white;
 }

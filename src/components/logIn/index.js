@@ -66,7 +66,7 @@ class LogIn extends Component {
               />
             </Form.Group>
 
-            <Button variant="primary" type="submit">
+            <Button variant="outline-primary" type="submit">
               Submit
             </Button>
           </Form>

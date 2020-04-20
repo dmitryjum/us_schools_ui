@@ -12,7 +12,7 @@ const SchoolList = ({schools}) => {
     if(isAuthenticated) {
       return(
         <Button className="school-modal-button"
-          variant="info"
+          variant="outline-warning"
           onClick={() => {dispatch(openModal({school}))}}>
             Edit School
         </Button>

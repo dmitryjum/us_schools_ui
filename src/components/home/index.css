@@ -1,6 +1,10 @@
 .main {
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 2fr 3fr;
   color: white;
-  margin: 0 1em 0 1em;
+  margin: 1em;
+}
+
+.more-schools-button {
+  margin: 1em auto;
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SchoolList from '../schoolList';
 import TopTwentyKeys from '../topTwentyKeys';
 import './index.css';
-import { Row, Col, Alert, Button } from 'react-bootstrap';
+import { Row, Alert, Button } from 'react-bootstrap';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as SchoolListActions from "../../actions/schoolList";
@@ -17,7 +17,8 @@ class Home extends Component {
     if (this.props.page >= this.props.totalPages) return null
     return(
       <>
-        <Button variant="primary"
+        <Button variant="outline-danger"
+          className="more-schools-button"
           size="lg"
           onClick={() => this.props.actions.addMoreSchools()}
           block
@@ -36,10 +37,10 @@ class Home extends Component {
         </Alert>
         <Row className="main">
             <TopTwentyKeys findByKey={this.props.actions.findByKey} />
-          <Col>
+          <div>
             <SchoolList schools={this.props.schools} />
             {this.moreSchoolsButton()}
-          </Col>
+          </div>
         </Row>
       </>
     );

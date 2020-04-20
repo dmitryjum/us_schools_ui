@@ -14,3 +14,7 @@
   text-align: center;
   cursor: pointer;
 }
+
+.top-twenty-container.list-group {
+  margin-top: 0;
+}
