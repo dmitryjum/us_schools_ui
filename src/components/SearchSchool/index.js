@@ -22,7 +22,7 @@ const SearchSchool = () => {
   return (
     <InputGroup>
       <FormControl
-        placeholder="Type a school title or any detail to search by"
+        placeholder="School title or detail"
         aria-label="Type a school title or any detail to search by"
         aria-describedby="basic-addon2"
         ref={searchRef}

@@ -33,8 +33,10 @@ const SchoolList = ({schools}) => {
               <Card.Body>
                 <Table striped bordered hover variant="dark">
                   <thead>
-                    <th>Key</th>
-                    <th>Value</th>
+                    <tr>
+                      <th>Key</th>
+                      <th>Value</th>
+                    </tr>
                   </thead>
                   <tbody>
                     {Object.keys(school.details).map((prop, id) => {

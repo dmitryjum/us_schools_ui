@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import USUApi from '../../utils/api';
 import { ListGroup } from 'react-bootstrap';
 import "./index.css";
+import { connect } from "react-redux";
 
 class TopTwentyKeys extends Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class TopTwentyKeys extends Component {
           {
             Object.entries(this.state.keys)
               .map(([k, v]) => (
-                <ListGroup.Item key={k} onClick={(e) => this.handleClick(k, e)}>{k}</ListGroup.Item>)
+                <ListGroup.Item className={this.props.filterKey === k && 'selected'} key={k} onClick={(e) => this.handleClick(k, e)}>{k}</ListGroup.Item>)
               )
           }
         </ListGroup>
@@ -37,4 +38,10 @@ class TopTwentyKeys extends Component {
   }
 }
 
-export default TopTwentyKeys;
+function mapStateToProps(state) {
+  return {
+    filterKey: state.schools.filter.details
+  }
+}
+
+export default connect(mapStateToProps, null)(TopTwentyKeys);

@@ -65,8 +65,6 @@ function mapDispatchToProps(dispatch) {
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 //TODO:
-// 11: Create NewSchool functionality additional to EditSchool
 // 15: Configure webpack
 // 16: Find ways to host it
 // 17: Write tests
-// Bugs: Redirect to root if logged in from LogIn
