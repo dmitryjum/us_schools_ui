@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import "./index.css";
-import { Card, Accordion, ListGroup, Button } from 'react-bootstrap';
+import { Card, Accordion, Button, Table } from 'react-bootstrap';
 import { openModal } from "../../actions/schoolModal";
 
 const SchoolList = ({schools}) => {
@@ -31,13 +31,22 @@ const SchoolList = ({schools}) => {
             </Accordion.Toggle>
             <Accordion.Collapse eventKey={id}>
               <Card.Body>
-                <ListGroup variant="flush">
-                  {Object.keys(school.details).map((prop, id) => {
-                    return (
-                      <ListGroup.Item key={id}>{`${prop}: ${school.details[prop]}`}</ListGroup.Item>
-                    );
-                  })}
-                </ListGroup>
+                <Table striped bordered hover variant="dark">
+                  <thead>
+                    <th>Key</th>
+                    <th>Value</th>
+                  </thead>
+                  <tbody>
+                    {Object.keys(school.details).map((prop, id) => {
+                      return (
+                        <tr key={id}>
+                          <td>{prop}</td>
+                          <td>{school.details[prop]}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </Table>
                 {schoolModalButton(school)}
               </Card.Body>
             </Accordion.Collapse>
