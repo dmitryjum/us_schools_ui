@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import SchoolList from '../schoolList';
 import TopTwentyKeys from '../topTwentyKeys';
-import SearchSchool from '../SearchSchool';
 import './index.css';
 import { Row, Col, Alert, Button } from 'react-bootstrap';
 import { connect } from "react-redux";
@@ -32,7 +31,6 @@ class Home extends Component {
   render() {
     return (
       <>
-        <SearchSchool />
         <Alert show={!this.props.isAuthenticated} variant={'warning'}>
           Please <Alert.Link href="/signup">Sign Up</Alert.Link> or <Alert.Link href="/login">Log In</Alert.Link> if you want to edit or add schools.
         </Alert>

@@ -22,7 +22,7 @@ const SchoolList = ({schools}) => {
 
   return (
     <>
-      <h3>School Results</h3>
+      <h3>Schools</h3>
       <Accordion defaultActiveKey="0">
         {schools.map((school, id) => (
           <Card key={id}>

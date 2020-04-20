@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import USUApi from '../../utils/api';
-import { Button } from 'react-bootstrap';
+import { ListGroup } from 'react-bootstrap';
 import "./index.css";
 
 class TopTwentyKeys extends Component {
@@ -23,17 +23,15 @@ class TopTwentyKeys extends Component {
   render() {
     return (
       <div className='top-twenty-wrapper'>
-        <h3>Top 20 detail keys to search schools by</h3>
-        <ul className='top-twenty-container'>
+        <h3>Top detail keys</h3>
+        <ListGroup className='top-twenty-container'>
           {
             Object.entries(this.state.keys)
               .map(([k, v]) => (
-                <li key={k}>
-                  <Button variant="link" onClick={(e) => this.handleClick(k, e)}>{k}</Button>, apears times: {v}
-                </li>)
+                <ListGroup.Item key={k} onClick={(e) => this.handleClick(k, e)}>{k}</ListGroup.Item>)
               )
           }
-        </ul>
+        </ListGroup>
       </div>
     );
   }
