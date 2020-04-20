@@ -1,0 +1,27 @@
+.top-twenty-container {
+  background-color: gray;
+  opacity: 0.7;
+  color: black;
+  border-radius: 10px;
+}
+
+.top-twenty-wrapper {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.top-twenty-container > .list-group-item {
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: initial;
+  background-color: initial;
+}
+
+.top-twenty-container.list-group {
+  margin-top: 0;
+}
+
+.selected {
+  color: #dc3545;
+  border-color: #dc3545;
+}

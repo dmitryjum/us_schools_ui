@@ -146,13 +146,13 @@ const SchoolModal = () => {
       <Modal.Footer>
         <Badge pill variant="info"><i>Edited by:</i> {school.details["last edited by"]}</Badge>
         <Badge pill variant="secondary"><i>On:</i> {new Date(Date.parse(school.updated_at)).toDateString()}</Badge>
-        <Button variant="info"  onClick={addARow}>
+        <Button variant="outline-success"  onClick={addARow}>
           Add a row
         </Button>
-        <Button variant="primary" type="submit" onClick={(e) => handleSubmit(e)}>
+        <Button variant="outline-primary" type="submit" onClick={(e) => handleSubmit(e)}>
           Submit
         </Button>
-        <Button variant="secondary" onClick={handleClose}>
+        <Button variant="outline-warning" onClick={handleClose}>
           Close
         </Button>
       </Modal.Footer>

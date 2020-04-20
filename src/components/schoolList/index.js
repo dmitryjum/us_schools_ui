@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import "./index.css";
-import { Card, Accordion, ListGroup, Button } from 'react-bootstrap';
+import { Card, Accordion, Button, Table } from 'react-bootstrap';
 import { openModal } from "../../actions/schoolModal";
 
 const SchoolList = ({schools}) => {
@@ -11,8 +11,8 @@ const SchoolList = ({schools}) => {
   function schoolModalButton(school) {
     if(isAuthenticated) {
       return(
-        <Button className="school-modal"
-          variant="info"
+        <Button className="school-modal-button"
+          variant="outline-warning"
           onClick={() => {dispatch(openModal({school}))}}>
             Edit School
         </Button>
@@ -22,7 +22,7 @@ const SchoolList = ({schools}) => {
 
   return (
     <>
-      <h3>School Results</h3>
+      <h3>Schools</h3>
       <Accordion defaultActiveKey="0">
         {schools.map((school, id) => (
           <Card key={id}>
@@ -31,13 +31,24 @@ const SchoolList = ({schools}) => {
             </Accordion.Toggle>
             <Accordion.Collapse eventKey={id}>
               <Card.Body>
-                <ListGroup variant="flush">
-                  {Object.keys(school.details).map((prop, id) => {
-                    return (
-                      <ListGroup.Item key={id}>{`${prop}: ${school.details[prop]}`}</ListGroup.Item>
-                    );
-                  })}
-                </ListGroup>
+                <Table striped bordered hover variant="dark">
+                  <thead>
+                    <tr>
+                      <th>Key</th>
+                      <th>Value</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Object.keys(school.details).map((prop, id) => {
+                      return (
+                        <tr key={id}>
+                          <td>{prop}</td>
+                          <td>{school.details[prop]}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </Table>
                 {schoolModalButton(school)}
               </Card.Body>
             </Accordion.Collapse>

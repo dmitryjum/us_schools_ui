@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import USUApi from '../../utils/api';
-import { Button } from 'react-bootstrap';
+import { ListGroup } from 'react-bootstrap';
+import "./index.css";
+import { connect } from "react-redux";
 
 class TopTwentyKeys extends Component {
   constructor(props) {
@@ -21,21 +23,25 @@ class TopTwentyKeys extends Component {
 
   render() {
     return (
-      <>
-        <h3>Top 20 detail keys to search schools by</h3>
-        <ul>
+      <div className='top-twenty-wrapper'>
+        <h3>Top detail keys</h3>
+        <ListGroup className='top-twenty-container'>
           {
             Object.entries(this.state.keys)
               .map(([k, v]) => (
-                <li key={k}>
-                  <Button variant="link" onClick={(e) => this.handleClick(k, e)}>{k}</Button>, apears times: {v}
-                </li>)
+                <ListGroup.Item className={this.props.filterKey === k && 'selected'} key={k} onClick={(e) => this.handleClick(k, e)}>{k}</ListGroup.Item>)
               )
           }
-        </ul>
-      </>
+        </ListGroup>
+      </div>
     );
   }
 }
 
-export default TopTwentyKeys;
+function mapStateToProps(state) {
+  return {
+    filterKey: state.schools.filter.details
+  }
+}
+
+export default connect(mapStateToProps, null)(TopTwentyKeys);

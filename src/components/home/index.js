@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import SchoolList from '../schoolList';
 import TopTwentyKeys from '../topTwentyKeys';
-import SearchSchool from '../SearchSchool';
 import './index.css';
-import { Row, Col, Alert, Button } from 'react-bootstrap';
+import { Row, Alert, Button } from 'react-bootstrap';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as SchoolListActions from "../../actions/schoolList";
@@ -18,7 +17,8 @@ class Home extends Component {
     if (this.props.page >= this.props.totalPages) return null
     return(
       <>
-        <Button variant="primary"
+        <Button variant="outline-danger"
+          className="more-schools-button"
           size="lg"
           onClick={() => this.props.actions.addMoreSchools()}
           block
@@ -32,18 +32,15 @@ class Home extends Component {
   render() {
     return (
       <>
-        <SearchSchool />
         <Alert show={!this.props.isAuthenticated} variant={'warning'}>
           Please <Alert.Link href="/signup">Sign Up</Alert.Link> or <Alert.Link href="/login">Log In</Alert.Link> if you want to edit or add schools.
         </Alert>
-        <Row>
-          <Col>
+        <Row className="main">
             <TopTwentyKeys findByKey={this.props.actions.findByKey} />
-          </Col>
-          <Col>
+          <div>
             <SchoolList schools={this.props.schools} />
             {this.moreSchoolsButton()}
-          </Col>
+          </div>
         </Row>
       </>
     );
@@ -68,8 +65,6 @@ function mapDispatchToProps(dispatch) {
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 //TODO:
-// 11: Create NewSchool functionality additional to EditSchool
 // 15: Configure webpack
 // 16: Find ways to host it
 // 17: Write tests
-// Bugs: Redirect to root if logged in from LogIn

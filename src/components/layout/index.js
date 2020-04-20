@@ -3,8 +3,9 @@ import './index.css';
 import Home from '../home';
 import SignUp from '../signUp';
 import LogIn from '../logIn';
+import SearchSchool from '../SearchSchool';
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import { Container, Navbar, Nav } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 import * as UserActions from "../../actions/user";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -12,7 +13,8 @@ import { connect } from "react-redux";
 class Layout extends Component {
   constructor(props) {
     super(props)
-    this.navBar = this.navBar.bind(this)
+    this.home = this.home.bind(this)
+    this.logSign = this.logSign.bind(this)
     this.logOut = this.logOut.bind(this)
   }
 
@@ -25,25 +27,23 @@ class Layout extends Component {
     this.props.actions.logOut()
   }
 
-  navBar() {
+  home() {
     if (this.props.isAuthenticated) {
-      return(
-        <Navbar bg="primary" variant="dark">
-          <Navbar.Brand href="/">Welcome Home {this.props.currentUser.email}</Navbar.Brand>
-          <Nav>
-            <Nav.Link href="#" onClick={(e) => this.logOut(e)}>Log Out</Nav.Link>
-          </Nav>
-        </Navbar>
-      )
+      return <Navbar.Brand href="/">Welcome Home {this.props.currentUser.email}</Navbar.Brand>
     } else {
-      return(
-        <Navbar bg="primary" variant="dark">
-          <Navbar.Brand href="/">Home</Navbar.Brand>
-          <Nav>
-            <Nav.Link href="/signup">Sign Up</Nav.Link>
-            <Nav.Link href="/login">Log In</Nav.Link>
-          </Nav>
-        </Navbar>
+      return <Navbar.Brand href="/">Home</Navbar.Brand>
+    }
+  }
+
+  logSign() {
+    if (this.props.isAuthenticated) {
+      return <Nav.Link href="#" onClick={(e) => this.logOut(e)}>Log Out</Nav.Link>
+    } else {
+      return (
+        <>
+          <Nav.Link href="/signup">Sign Up</Nav.Link>
+          <Nav.Link href="/login">Log In</Nav.Link>
+        </>
       )
     }
   }
@@ -51,12 +51,14 @@ class Layout extends Component {
   render() {
     return (
       <Router>
-        <Container>
-          {this.navBar()}
-          <Route exact path="/" component={Home} />
-          <Route path="/signup" component={SignUp} />
-          <PrivateRoute authenticated={this.props.isAuthenticated} path="/login" component={LogIn} />
-        </Container>
+        <Navbar bg="dark" variant="dark">
+          {this.home()}
+          <Nav className="mr-auto"><SearchSchool /></Nav>
+          <Nav>{this.logSign()}</Nav>
+        </Navbar>
+        <Route exact path="/" component={Home} />
+        <Route path="/signup" component={SignUp} />
+        <PrivateRoute authenticated={this.props.isAuthenticated} path="/login" component={LogIn} />
       </Router>
     );
   }
