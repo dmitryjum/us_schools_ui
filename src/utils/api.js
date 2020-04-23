@@ -1,17 +1,20 @@
 import axios from 'axios'
 import * as constants from "../constants/env/us_states_api";
+const USUAxios = axios.create({
+  baseURL: constants.US_STATE_UNIVERSITIES_HOST
+});
 
 class USUApi {
   static getSchools(params={}) {
-    return axios.get(`${constants.US_STATE_UNIVERSITIES_LOCAL_HOST}/api/v1/schools`, {
+    return USUAxios.get(`/api/v1/schools`, {
       headers: { 'Accept': 'application/json' },
       params: params
     })
   }
 
   static updateSchool(params={}) {
-    return axios({
-      url: `${constants.US_STATE_UNIVERSITIES_LOCAL_HOST}/api/v1/schools/${params['school']['id']}`,
+    return USUAxios({
+      url: `/api/v1/schools/${params['school']['id']}`,
       method: 'patch',
       headers: {Authorization: `Bearer ${params['auth_token']}`},
       data: {school: params['school']}
@@ -19,8 +22,8 @@ class USUApi {
   }
 
   static createSchool(params={}) {
-    return axios({
-      url: `${constants.US_STATE_UNIVERSITIES_LOCAL_HOST}/api/v1/schools`,
+    return USUAxios({
+      url: `/api/v1/schools`,
       method: 'post',
       headers: { Authorization: `Bearer ${params['auth_token']}` },
       data: { school: params['school'] }
@@ -28,31 +31,31 @@ class USUApi {
   }
 
   static getTopTwentyKeys() {
-    return axios.get(`${constants.US_STATE_UNIVERSITIES_LOCAL_HOST}/api/v1/schools/top_twenty_keys`, {
+    return USUAxios.get(`/api/v1/schools/top_twenty_keys`, {
       headers: {'Accept': 'application/json'}
     })
   }
 
   static search(params={'term': ''}) {
-    return axios.get(`${constants.US_STATE_UNIVERSITIES_LOCAL_HOST}/api/v1/schools/search`, {
+    return USUAxios.get(`/api/v1/schools/search`, {
       headers: { 'Accept': 'application/json' },
       params: params
     })
   }
 
   static signUp(params={}) {
-    return axios.post(`${constants.US_STATE_UNIVERSITIES_LOCAL_HOST}/api/v1/users`, {
+    return USUAxios.post(`/api/v1/users`, {
       user: params
     })
   }
 
   static logIn(params={}) {
-    return axios.post(`${constants.US_STATE_UNIVERSITIES_LOCAL_HOST}/api/v1/users/login`, params)
+    return USUAxios.post(`/api/v1/users/login`, params)
   }
 
   static isAuthenticated(token) {
-    return axios.get(
-      `${constants.US_STATE_UNIVERSITIES_LOCAL_HOST}/api/v1/users/is_authenticated`,
+    return USUAxios.get(
+      `/api/v1/users/is_authenticated`,
       {
         headers: { Authorization: `Bearer ${token}` }
       }
