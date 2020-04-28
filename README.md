@@ -1,8 +1,22 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project features the user interface for http://usastateuniversities.herokuapp.com API that contains US community college database with some minimal data scraped from schools' Wiki pages. This project lists schools from the database, lists the most popular available keys that are used in schools' descriptions. It allows users search for schools by any property that may come to their mind. The user can sign up and edit any school or add a new school when logged in.
+
+Production version is currently deployed here:
+http://us-community-colleges-ui.s3-website-us-west-2.amazonaws.com/
+
+## Libraries that were used to build it:
+1. Node v11.10.0 (Node 8.16.0 or 10.16.0 or later are required to run the app locally)
+2. React 16.13.0
+3. Redux 4.0.5
+4. React-redux 7.2.0
+5. React-scripts 3.4.0
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm install`
+
+Install all npm packages
 
 ### `npm start`
 
@@ -11,6 +25,9 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
+
+`**Important**`<br />
+Make sure you are running *us_state_universities* (https://github.com/dmitryjum/us_state_universities) Rails application on port 3001 when running us_schools_ui in development mode.
 
 ### `npm test`
 
