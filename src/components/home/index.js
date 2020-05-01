@@ -66,5 +66,4 @@ export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 //TODO:
 // 15: Configure webpack
-// 16: Find ways to host it
 // 17: Write tests
