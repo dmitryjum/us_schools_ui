@@ -1,5 +1,5 @@
 import axios from 'axios'
-import * as constants from "../constants/env/us_states_api";
+import { constants } from "../constants/env/us_states_api";
 const USUAxios = axios.create({
   baseURL: constants.US_STATE_UNIVERSITIES_HOST
 });
