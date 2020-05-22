@@ -11,6 +11,6 @@ COPY ["package.json", "package-lock.json*", "./"]
 
 
 # install app dependencies
-RUN npm install --silent
+RUN npm install --silent --no-package-lock
 RUN npm audit fix
 RUN npm install react-scripts@3.4.0 -g
