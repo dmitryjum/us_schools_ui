@@ -8,7 +8,7 @@ http://us-community-colleges-ui.s3-website-us-west-2.amazonaws.com/
 2. React 16.13.0
 3. Redux 4.0.5
 4. React-redux 7.2.0
-5. React-scripts 3.4.0
+5. React-scripts 5.0.1
 
 ## Available Scripts
 
