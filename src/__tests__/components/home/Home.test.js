@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import Home from '../../components/home';
+import TopTwentyKeys from '../../components/topTwentyKeys';
 describe("Home component", () => {
   test('renders the landing page', () => {
-    render(<Home />);
+    render(<topTwentyKeys />);
   });
 })
