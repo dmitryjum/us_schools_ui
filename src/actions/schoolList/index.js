@@ -6,7 +6,7 @@ export const SET_FILTER = 'SET_FILTER';
 export const SET_SEARCH = 'SET_SEARCH';
 export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
 
-export async function requestSchools(params = {}) {
+export function requestSchools(params = {}) {
   return (dispatch, getState) => {
     params = {
       ...params,
