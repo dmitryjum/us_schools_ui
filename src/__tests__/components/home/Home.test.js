@@ -4,24 +4,22 @@ import { render, fireEvent, waitFor, screen, act } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-// import schoolList from '../../../reducers/schoolList';
 import rootReducer from '../../../reducers'
 import Home from '../../../components/home';
-// import axios from 'axios'
 import USUApi from '../../../utils/api';
 import * as SchoolListActions from '../../../actions/schoolList';
 
 const schools = [
-  { name: 'Test School', id: 1, details: { mascot: "Grizzly bear" } },
-  { name: 'Test School 2', id: 2, details: { mascot: "Grizzly bear" } }
+  { title: 'Test School', id: 1, details: { mascot: "Grizzly bear" } },
+  { title: 'Test School 2', id: 2, details: { mascot: "Wild boar" } }
 ];
 const schoolListState = {
   records: schools,
   schoolPage: 1,
-  per_page: 10,
+  per_page: 2,
   filter: {},
   search: {},
-  totalPages: null
+  totalPages: 2
 };
 const userState = {
   data: {
@@ -53,7 +51,6 @@ describe('Home component', () => {
       }
     });
     // console.log(`api: ${USUApi}`)
-    // jest.mock('axios')
     const spyTTK = jest.spyOn(USUApi, 'getTopTwentyKeys')
     const spySearch = jest.spyOn(USUApi, 'search')
     const respTTK = {
@@ -65,8 +62,6 @@ describe('Home component', () => {
     const respSearch = { totalPages: 1 }
     spyTTK.mockResolvedValue(respTTK)
     spySearch.mockResolvedValue(respSearch)
-    // jest.spyOn(axios, 'get')
-    // axios.get.mockResolvedValue(resp);
 
     store.dispatch(SchoolListActions.requestSchools());
   });
@@ -81,8 +76,8 @@ describe('Home component', () => {
     });
     expect(screen.getByText(/Sign Up/i)).toBeInTheDocument();
     expect(screen.getByText(/More schools!/i)).toBeInTheDocument();
-    expect(screen.getByText(/Test School/i)).toBeInTheDocument();
-    expect(screen.getByText(/Test School 2/i)).toBeInTheDocument();
+    expect(screen.getByText(/Test School/)).toBeInTheDocument();
+    expect(screen.getByText(/Test School 2/)).toBeInTheDocument();
   });
 
   xit('should call addMoreSchools action on clicking the button', async () => {

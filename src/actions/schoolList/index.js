@@ -19,7 +19,7 @@ export function requestSchools(params = {}) {
         dispatch(requestSchoolsThunk(resp))
       })
       .catch(error => {
-         console.log("errors fetchin schools: ", error)
+        //  console.log("errors fetchin schools: ", error)
       })
   }
 }
@@ -38,7 +38,7 @@ export function search(params = {'term': ''}) {
         dispatch(searchSuccessThunk(resp))
       })
       .catch(error => {
-         console.log("errors fetchin schools: ", error)
+        //  console.log("errors fetchin schools: ", error)
       })
   }
 }
@@ -65,7 +65,7 @@ export function addMoreSchools(params={}) {
         addSchools({...resp, schoolPage: params.page })
       )
     }).catch(error => {
-         console.log("errors fetchin schools: ", error)
+        //  console.log("errors fetchin schools: ", error)
       })
   }
 }
