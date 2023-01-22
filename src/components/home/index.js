@@ -14,7 +14,7 @@ class Home extends Component {
   }
 
   moreSchoolsButton() {
-    if (this.props.page >= this.props.totalPages) return null
+    if (this.props.page >= this.props.totalPages && typeof(this.props.error) !== "string") return null
     return(
       <>
         <Button variant="outline-danger"
@@ -38,7 +38,10 @@ class Home extends Component {
         <Row className="main">
             <TopTwentyKeys findByKey={this.props.actions.findByKey} />
           <div>
-            <SchoolList schools={this.props.schools} />
+            <Alert show={typeof(this.props.error) === "string"} variant={'warning'}>
+              {this.props.error}
+            </Alert>
+            {typeof(this.props.error) !== "string" && <SchoolList schools={this.props.schools} />}
             {this.moreSchoolsButton()}
           </div>
         </Row>
@@ -52,7 +55,8 @@ function mapStateToProps(state) {
     schools: state.schools.records,
     page: state.schools.schoolPage,
     totalPages: state.schools.totalPages,
-    isAuthenticated: state.user.data.isAuthenticated
+    isAuthenticated: state.user.data.isAuthenticated,
+    error: state.schools.error
   };
 }
 

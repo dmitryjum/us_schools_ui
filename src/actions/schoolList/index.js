@@ -5,8 +5,9 @@ export const ADD_SCHOOLS = 'ADD_SCHOOLS';
 export const SET_FILTER = 'SET_FILTER';
 export const SET_SEARCH = 'SET_SEARCH';
 export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
+export const REQUEST_SCHOOLS_ERROR = 'REQUEST_SCHOOLS_ERROR';
 
-export async function requestSchools(params = {}) {
+export function requestSchools(params = {}) {
   return (dispatch, getState) => {
     params = {
       ...params,
@@ -18,7 +19,9 @@ export async function requestSchools(params = {}) {
       .then(resp => {
         dispatch(requestSchoolsThunk(resp))
       })
-      .catch(error => schoolFetchError(error))
+      .catch(error => {
+        dispatch(schoolFetchErrorThunk(error.toString()))
+      })
   }
 }
 
@@ -34,11 +37,13 @@ export function search(params = {'term': ''}) {
       .then(resp => {
         dispatch(searchSuccessThunk(resp))
       })
-      .catch(error => schoolFetchError(error))
+      .catch(error => {
+        dispatch(schoolFetchErrorThunk(error.toString()))
+      })
   }
 }
 
-export async function findByKey(params = {}) {
+export function findByKey(params = {}) {
   return (dispatch) => {
     dispatch(setFilterThunk({filter: params}));
     dispatch(requestSchools())
@@ -56,10 +61,10 @@ export function addMoreSchools(params={}) {
     const fetchSchools = params['term'] === undefined ?
      USUApi.getSchools(params) : USUApi.search(params)
     fetchSchools.then(resp => {
-      dispatch(
-        addSchools({...resp, schoolPage: params.page })
-      )
-    }).catch(error => schoolFetchError(error))
+      dispatch(addSchoolsThunk({...resp, schoolPage: params.page }))
+    }).catch(error => {
+      dispatch(schoolFetchErrorThunk(error.toString()))
+    })
   }
 }
 
@@ -73,7 +78,7 @@ const setSearchThunk = payload => ({
   payload
 })
 
-const addSchools = payload => ({
+const addSchoolsThunk = payload => ({
   type: ADD_SCHOOLS,
   payload
 });
@@ -86,8 +91,9 @@ const requestSchoolsThunk = payload => ({
 const setFilterThunk = payload => ({
   type: SET_FILTER,
   payload
-})
+});
 
-function schoolFetchError(error) {
-  console.log("errors fetchin schools: ", error)
-}
+const schoolFetchErrorThunk = payload => ({
+  type: REQUEST_SCHOOLS_ERROR,
+  payload
+});

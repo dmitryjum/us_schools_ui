@@ -1,4 +1,4 @@
-import { REQUEST_SCHOOLS, ADD_SCHOOLS, SET_FILTER, SET_SEARCH, SEARCH_SUCCESS } from "../../actions/schoolList";
+import { REQUEST_SCHOOLS, ADD_SCHOOLS, SET_FILTER, SET_SEARCH, SEARCH_SUCCESS, REQUEST_SCHOOLS_ERROR } from "../../actions/schoolList";
 
 const initialState = {
   records: [],
@@ -6,7 +6,8 @@ const initialState = {
   per_page: 10,
   filter: {},
   search: {},
-  totalPages: null
+  totalPages: null,
+  error: null
 }
 
 export default function schools(state = initialState, action) {
@@ -39,6 +40,11 @@ export default function schools(state = initialState, action) {
         schoolPage: action.payload.schoolPage,
         totalPages: action.payload.data.pages_per_limit,
         records: state.records.concat(action.payload.data.records)
+      }
+    case REQUEST_SCHOOLS_ERROR:
+      return {
+        ...state,
+        error: action.payload
       }
     default:
       return state;
