@@ -62,14 +62,16 @@ describe('Home component', () => {
     jest.resetModules();
   });
 
-  it('should render all the components', () => {
+  it('should render all the components',  async () => {
     act(() => {
       renderWithRedux(<Home />);
     });
     expect(screen.getByText(/Sign Up/i)).toBeInTheDocument();
     expect(screen.getByText(/More schools!/i)).toBeInTheDocument();
     expect(screen.getByText(/Grizzly School/i)).toBeInTheDocument();
-    expect(screen.getByText(/Wild Boar School/)).toBeInTheDocument();
+    expect(screen.getByText(/Wild Boar School/i)).toBeInTheDocument();
+    expect(screen.getByText(/Top detail keys/i)).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText(/website/i)).toBeInTheDocument());
   });
 
   it('should call addMoreSchools action on clicking the button', async () => {

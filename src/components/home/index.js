@@ -14,7 +14,7 @@ class Home extends Component {
   }
 
   moreSchoolsButton() {
-    if (this.props.page >= this.props.totalPages) return null
+    if (this.props.page >= this.props.totalPages && typeof(this.props.error) !== "string") return null
     return(
       <>
         <Button variant="outline-danger"
@@ -42,7 +42,7 @@ class Home extends Component {
               {this.props.error}
             </Alert>
             {typeof(this.props.error) !== "string" && <SchoolList schools={this.props.schools} />}
-            {typeof(this.props.error) !== "string" && this.moreSchoolsButton()}
+            {this.moreSchoolsButton()}
           </div>
         </Row>
       </>

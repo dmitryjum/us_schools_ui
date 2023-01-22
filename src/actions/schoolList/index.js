@@ -44,7 +44,7 @@ export function search(params = {'term': ''}) {
   }
 }
 
-export async function findByKey(params = {}) {
+export function findByKey(params = {}) {
   return (dispatch) => {
     dispatch(setFilterThunk({filter: params}));
     dispatch(requestSchools())
