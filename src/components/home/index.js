@@ -38,8 +38,11 @@ class Home extends Component {
         <Row className="main">
             <TopTwentyKeys findByKey={this.props.actions.findByKey} />
           <div>
-            <SchoolList schools={this.props.schools} />
-            {this.moreSchoolsButton()}
+            <Alert show={typeof(this.props.error) === "string"} variant={'warning'}>
+              {this.props.error}
+            </Alert>
+            {typeof(this.props.error) !== "string" && <SchoolList schools={this.props.schools} />}
+            {typeof(this.props.error) !== "string" && this.moreSchoolsButton()}
           </div>
         </Row>
       </>
@@ -52,7 +55,8 @@ function mapStateToProps(state) {
     schools: state.schools.records,
     page: state.schools.schoolPage,
     totalPages: state.schools.totalPages,
-    isAuthenticated: state.user.data.isAuthenticated
+    isAuthenticated: state.user.data.isAuthenticated,
+    error: state.schools.error
   };
 }
 

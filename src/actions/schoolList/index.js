@@ -5,6 +5,7 @@ export const ADD_SCHOOLS = 'ADD_SCHOOLS';
 export const SET_FILTER = 'SET_FILTER';
 export const SET_SEARCH = 'SET_SEARCH';
 export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
+export const REQUEST_SCHOOLS_ERROR = 'REQUEST_SCHOOLS_ERROR';
 
 export function requestSchools(params = {}) {
   return (dispatch, getState) => {
@@ -19,7 +20,7 @@ export function requestSchools(params = {}) {
         dispatch(requestSchoolsThunk(resp))
       })
       .catch(error => {
-        //  console.log("errors fetchin schools: ", error)
+        dispatch(schoolFetchErrorThunk(error.toString()))
       })
   }
 }
@@ -38,7 +39,7 @@ export function search(params = {'term': ''}) {
         dispatch(searchSuccessThunk(resp))
       })
       .catch(error => {
-        //  console.log("errors fetchin schools: ", error)
+        dispatch(schoolFetchErrorThunk(error.toString()))
       })
   }
 }
@@ -65,7 +66,7 @@ export function addMoreSchools(params={}) {
         addSchools({...resp, schoolPage: params.page })
       )
     }).catch(error => {
-        //  console.log("errors fetchin schools: ", error)
+        dispatch(schoolFetchErrorThunk(error.toString()))
       })
   }
 }
@@ -93,8 +94,9 @@ const requestSchoolsThunk = payload => ({
 const setFilterThunk = payload => ({
   type: SET_FILTER,
   payload
-})
+});
 
-function schoolFetchError(error) {
-  console.log("errors fetchin schools: ", error)
-}
+const schoolFetchErrorThunk = payload => ({
+  type: REQUEST_SCHOOLS_ERROR,
+  payload
+});

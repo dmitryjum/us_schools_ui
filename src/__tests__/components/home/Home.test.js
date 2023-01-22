@@ -46,7 +46,7 @@ describe('Home component', () => {
     const spyTTK = jest.spyOn(USUApi, 'getTopTwentyKeys')
     const spySearch = jest.spyOn(USUApi, 'search')
     const respTTK = {
-      data: { "website":642,"established":638,"type":633,"location":632,"campus":586,"colors":578,"students":564,"nickname":532,"president":510,"sporting affiliations":478,"endowment":467,"mascot":430,"undergraduates":421,"academic staff":413,"postgraduates":394,"motto":383,"parent institution":356,"academic affiliations":305,"former names":288,"provost":259 },
+      data: { "website":642,"established":638,"type":633 },
       status: 200,
       statusText: "OK"
     }
