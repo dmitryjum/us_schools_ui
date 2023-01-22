@@ -10,8 +10,8 @@ import USUApi from '../../../utils/api';
 import * as SchoolListActions from '../../../actions/schoolList';
 
 const schools = [
-  { title: 'Test School', id: 1, details: { mascot: "Grizzly bear" } },
-  { title: 'Test School 2', id: 2, details: { mascot: "Wild boar" } }
+  { title: 'Grizzly School', id: 1, details: { mascot: "Grizzly bear" } },
+  { title: 'Wild Boar School', id: 2, details: { mascot: "Wild boar" } }
 ];
 const schoolListState = {
   records: schools,
@@ -43,14 +43,6 @@ const renderWithRedux = (component) => {
 
 describe('Home component', () => {
   beforeEach(() => {
-    jest.mock('../../../constants/env/us_states_api', () => {
-      return {
-        constants: {
-          US_STATE_UNIVERSITIES_HOST: 'https://api.example.com'
-        }
-      }
-    });
-    // console.log(`api: ${USUApi}`)
     const spyTTK = jest.spyOn(USUApi, 'getTopTwentyKeys')
     const spySearch = jest.spyOn(USUApi, 'search')
     const respTTK = {
@@ -76,22 +68,20 @@ describe('Home component', () => {
     });
     expect(screen.getByText(/Sign Up/i)).toBeInTheDocument();
     expect(screen.getByText(/More schools!/i)).toBeInTheDocument();
-    expect(screen.getByText(/Test School/)).toBeInTheDocument();
-    expect(screen.getByText(/Test School 2/)).toBeInTheDocument();
+    expect(screen.getByText(/Grizzly School/i)).toBeInTheDocument();
+    expect(screen.getByText(/Wild Boar School/)).toBeInTheDocument();
   });
 
-  xit('should call addMoreSchools action on clicking the button', async () => {
+  it('should call addMoreSchools action on clicking the button', async () => {
     const spy = jest.spyOn(SchoolListActions, 'addMoreSchools');
     renderWithRedux(<Home />);
     fireEvent.click(screen.getByText(/More schools!/i));
     await waitFor(() => expect(spy).toHaveBeenCalled());
   });
 
-  xit('should not render alert message when authenticated', () => {
+  it('should not render alert message when authenticated', () => {
     store.dispatch({ type: 'USER_AUTHENTICATED' });
     renderWithRedux(<Home />);
     expect(screen.queryByText(/Please Sign Up/i)).toBeNull();
   });
 });
-
-// yarn add react-dom@version
