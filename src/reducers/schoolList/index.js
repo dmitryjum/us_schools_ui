@@ -11,9 +11,6 @@ const initialState = {
 }
 
 export default function schools(state = initialState, action) {
-  if (action.type === REQUEST_SCHOOLS_ERROR) {
-    // debugger
-  }
   switch (action.type) {
     case REQUEST_SCHOOLS:
       return {

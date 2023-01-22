@@ -26,7 +26,6 @@ export function requestSchools(params = {}) {
 }
 
 export function search(params = {'term': ''}) {
-  console.log("in test: " + params)
   return (dispatch, getState) => {
     dispatch(setSearchThunk({search: params}))
     params = {
@@ -62,12 +61,10 @@ export function addMoreSchools(params={}) {
     const fetchSchools = params['term'] === undefined ?
      USUApi.getSchools(params) : USUApi.search(params)
     fetchSchools.then(resp => {
-      dispatch(
-        addSchools({...resp, schoolPage: params.page })
-      )
+      dispatch(addSchoolsThunk({...resp, schoolPage: params.page }))
     }).catch(error => {
-        dispatch(schoolFetchErrorThunk(error.toString()))
-      })
+      dispatch(schoolFetchErrorThunk(error.toString()))
+    })
   }
 }
 
@@ -81,7 +78,7 @@ const setSearchThunk = payload => ({
   payload
 })
 
-const addSchools = payload => ({
+const addSchoolsThunk = payload => ({
   type: ADD_SCHOOLS,
   payload
 });
