@@ -14,9 +14,13 @@ const SearchSchool = () => {
     dispatch(search({ term: searchRef.current.value}))
   }
 
+  const handleNewSchool = () => {
+    dispatch(openModal())
+  }
+
   function newSchoolButton() {
     if (!isAuthenticated) return null;
-    return <Button variant="outline-warning" onClick={() => dispatch(openModal())}>New School</Button>
+    return <Button variant="outline-warning" onClick={handleNewSchool}>New School</Button>
   }
 
   return (
