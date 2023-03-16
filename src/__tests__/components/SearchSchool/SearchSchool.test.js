@@ -32,29 +32,42 @@ describe('SearchSchool component', () => {
     expect(screen.getByText(/Search/i)).toBeInTheDocument();
   });
 
-  xit('should dispatch the search action when the Search button is clicked', () => {
-    const searchButton = component.getByText('Search');
-    fireEvent.click(searchButton);
-
-    expect(store.getActions()).toEqual([{ type: 'SEARCH', payload: { term: '' } }]);
-  });
-
-  xit('should not render the New School button if the user is not authenticated', () => {
-    store = mockStore({
-      user: {
-        data: {
-          isAuthenticated: false // Set isAuthenticated to false for testing purposes
+  it('should dispatch the search action when the Search button is clicked', () => {
+    const store = createStore(
+      rootReducer,
+      {
+        user: {
+          data: {
+            isAuthenticated: false
+          }
         }
       }
-    });
-
-    component.rerender(
-      <Provider store={store}>
-        <SearchSchool />
-      </Provider>
     );
+    act(() => {
+      renderWithRedux(<SearchSchool />, store);
+    });
+    const searchButton = screen.getByText('Search');
+    fireEvent.click(searchButton);
 
-    const newSchoolButton = component.queryByText('New School');
-    expect(newSchoolButton).not.toBeInTheDocument();
+    expect(store.getActions()).toEqual([{ type: 'SET_SEARCH', payload: { term: '' } }]);
   });
+
+  // xit('should not render the New School button if the user is not authenticated', () => {
+  //   store = mockStore({
+  //     user: {
+  //       data: {
+  //         isAuthenticated: false // Set isAuthenticated to false for testing purposes
+  //       }
+  //     }
+  //   });
+
+  //   component.rerender(
+  //     <Provider store={store}>
+  //       <SearchSchool />
+  //     </Provider>
+  //   );
+
+  //   const newSchoolButton = component.queryByText('New School');
+  //   expect(newSchoolButton).not.toBeInTheDocument();
+  // });
 });
