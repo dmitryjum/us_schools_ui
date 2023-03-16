@@ -62,6 +62,23 @@ describe('SearchSchool component', () => {
     await waitFor(() => expect(useDispatchMock).toHaveBeenCalled())
   });
 
+  it('should not render the New School button if the user is not authenticated', () => {
+    const store = createStore(
+      rootReducer,
+      {
+        user: {
+          data: {
+            isAuthenticated: false
+          }
+        }
+      }
+    );
+    act(() => {
+      renderWithRedux(<SearchSchool />, store);
+    });
+    expect(screen.queryByText('New School')).not.toBeInTheDocument();
+  })
+
   // xit('should not render the New School button if the user is not authenticated', () => {
   //   store = mockStore({
   //     user: {
