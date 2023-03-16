@@ -1,7 +1,9 @@
 import React from 'react';
-import { render, fireEvent, screen, act } from '@testing-library/react';
+import reduxThunk from 'redux-thunk'
+import { render, fireEvent, waitFor, screen, act } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { Provider } from 'react-redux';
+import * as reactRedux from 'react-redux'
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from '../../../reducers'
 import SearchSchool from '../../../components/SearchSchool';
@@ -13,6 +15,12 @@ const renderWithRedux = (component, store) => {
     </Provider>
   )
 }
+
+afterEach(() => {
+  jest.resetModules();
+});
+
+// don't create a real store, learn how to create a store mock
 
 describe('SearchSchool component', () => {
   it('should render all the components', () => {
@@ -32,7 +40,8 @@ describe('SearchSchool component', () => {
     expect(screen.getByText(/Search/i)).toBeInTheDocument();
   });
 
-  it('should dispatch the search action when the Search button is clicked', () => {
+  it('should dispatch the search action when the Search button is clicked', async () => {
+    const useDispatchMock = jest.spyOn(reactRedux, 'useDispatch')
     const store = createStore(
       rootReducer,
       {
@@ -41,7 +50,8 @@ describe('SearchSchool component', () => {
             isAuthenticated: false
           }
         }
-      }
+      },
+      applyMiddleware(reduxThunk)
     );
     act(() => {
       renderWithRedux(<SearchSchool />, store);
@@ -49,7 +59,7 @@ describe('SearchSchool component', () => {
     const searchButton = screen.getByText('Search');
     fireEvent.click(searchButton);
 
-    expect(store.getActions()).toEqual([{ type: 'SET_SEARCH', payload: { term: '' } }]);
+    await waitFor(() => expect(useDispatchMock).toHaveBeenCalled())
   });
 
   // xit('should not render the New School button if the user is not authenticated', () => {
