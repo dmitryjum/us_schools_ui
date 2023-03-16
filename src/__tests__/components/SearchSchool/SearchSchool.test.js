@@ -6,19 +6,7 @@ import { createStore, applyMiddleware } from 'redux';
 import rootReducer from '../../../reducers'
 import SearchSchool from '../../../components/SearchSchool';
 
-// const mockStore = configureStore([]);
-const userState = {
-  data: {
-    isAuthenticated: false
-  }
-}
-
-const store = createStore(
-  rootReducer,
-  {user: userState}
-);
-
-const renderWithRedux = (component) => {
+const renderWithRedux = (component, store) => {
   return render(
     <Provider store={store}>
       {component}
@@ -27,28 +15,19 @@ const renderWithRedux = (component) => {
 }
 
 describe('SearchSchool component', () => {
-  // let store;
-  // let component;
-
-  // beforeEach(() => {
-  //   store = mockStore({
-  //     user: {
-  //       data: {
-  //         isAuthenticated: true // Set isAuthenticated to true for testing purposes
-  //       }
-  //     }
-  //   });
-
-  //   component = render(
-  //     <Provider store={store}>
-  //       <SearchSchool />
-  //     </Provider>
-  //   );
-  // });
-
   it('should render all the components', () => {
+    const store = createStore(
+      rootReducer,
+      {
+        user: {
+          data: {
+            isAuthenticated: false
+          }
+        }
+      }
+    );
     act(() => {
-      renderWithRedux(<SearchSchool />);
+      renderWithRedux(<SearchSchool />, store);
     });
     expect(screen.getByText(/Search/i)).toBeInTheDocument();
   });
